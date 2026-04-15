@@ -6,6 +6,7 @@ import { LandingPage } from "./pages/LandingPage";
 import { TimelinePage } from "./pages/TimelinePage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { NotFound } from "./pages/NotFound";
+import { UniquePointsPage } from "./pages/UniquePointsPage";
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/timeline" element={<TimelinePage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/difference" element={<UniquePointsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>
