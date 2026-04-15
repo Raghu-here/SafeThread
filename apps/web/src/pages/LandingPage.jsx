@@ -17,9 +17,9 @@ const FeatureCard = ({ icon: Icon, title, description }) =>
   </motion.div>;
 
 const HowStep = ({ number, icon: Icon, title, description, isLast }) =>
-  <div className="relative flex gap-8 pb-16">
+  <div className="relative flex gap-4 md:gap-8 pb-12 md:pb-16">
     {!isLast && (
-      <div className="absolute left-[19px] top-12 bottom-0 w-px bg-silver-sage/30" />
+      <div className="absolute left-5 top-11 bottom-0 w-px bg-silver-sage/30" />
     )}
     <div className="flex-shrink-0 w-10 h-10 mt-1 rounded-full bg-warm-white border border-silver-sage/50 flex items-center justify-center text-terracotta font-mono text-sm font-bold z-10">
       {number}

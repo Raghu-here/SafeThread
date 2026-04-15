@@ -110,9 +110,11 @@ export const UniquePointsSection = ({ id }) => {
             </Col>
           </Row>
 
-          <div style={{ backgroundColor: palette.beige, padding: '40px', borderRadius: '24px' }}>
+          <div style={{ backgroundColor: palette.beige, padding: '40px 24px', borderRadius: '24px' }}>
             <Title level={3} style={{ color: palette.darkOlive, marginBottom: '32px', textAlign: 'center' }}>Direct Comparison</Title>
-            <div style={{ overflowX: 'auto' }}>
+            
+            {/* Desktop Table */}
+            <div className="hidden md:block">
               <Table 
                 dataSource={dataSource} 
                 columns={columns} 
@@ -126,6 +128,29 @@ export const UniquePointsSection = ({ id }) => {
                   }
                 }}
               />
+            </div>
+
+            {/* Mobile Cards */}
+            <div className="md:hidden space-y-4">
+              {dataSource.map((item) => (
+                <div key={item.key} style={{ backgroundColor: palette.cream, padding: '24px', borderRadius: '20px', border: `1px solid ${palette.mutedGrey}33` }}>
+                  <div style={{ fontSize: '12px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.1em', color: palette.mutedGrey, marginBottom: '12px' }}>
+                    {item.feature}
+                  </div>
+                  <div style={{ marginBottom: '16px' }}>
+                    <div style={{ fontSize: '10px', color: palette.mutedGrey, marginBottom: '4px' }}>SafeThread (Our Edge)</div>
+                    <div style={{ color: palette.terracotta, fontWeight: 'bold', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      {item.safethread} <CheckCircleFilled />
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '10px', color: palette.mutedGrey, marginBottom: '4px' }}>Traditional Methods</div>
+                    <div style={{ color: palette.darkOlive, fontSize: '14px', opacity: 0.7 }}>
+                      {item.traditional}
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
