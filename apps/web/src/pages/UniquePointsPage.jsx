@@ -1,16 +1,16 @@
 import React from 'react';
 import { Layout, Button, Space } from 'antd';
 import { UniquePointsSection } from '../components/UniquePointsSection';
+import { FooterSection } from '../components/FooterSection';
 
-const { Header, Footer } = Layout;
+const { Header } = Layout;
 
 export const UniquePointsPage = () => {
   const palette = {
     cream: '#ffe8d6',
-    mutedGrey: '#b7b7a4',
-    sageGreen: '#a5a58d',
     darkOlive: '#6b705c',
     beige: '#ddbea9',
+    sageGreen: '#a5a58d',
   };
 
   return (
@@ -49,9 +49,7 @@ export const UniquePointsPage = () => {
 
       <UniquePointsSection />
 
-      <Footer style={{ backgroundColor: palette.mutedGrey, height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <span style={{ color: palette.darkOlive }}>© 2026 SafeThread. All rights reserved.</span>
-      </Footer>
+      <FooterSection />
     </Layout>
   );
 };

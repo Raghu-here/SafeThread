@@ -3,6 +3,7 @@ import { Shield, Clock, Lock, Heart, ChevronRight, PenLine, Layers, Download } f
 import { Link } from "react-router-dom";
 import Button from "@/components/Button";
 import { UniquePointsSection } from "../components/UniquePointsSection";
+import { FooterSection } from "../components/FooterSection";
 
 const FeatureCard = ({ icon: Icon, title, description }) =>
   <motion.div
@@ -174,10 +175,6 @@ export const LandingPage = () => {
       <UniquePointsSection id="difference" />
 
       {/* Footer */}
-      <footer className="py-12 px-6 border-t border-silver-sage/20 text-center">
-        <p className="text-xs text-sage font-mono uppercase tracking-widest">
-          SafeThread &copy; 2024 &bull; A Sanctuary for Truth
-        </p>
-      </footer>
+      <FooterSection />
     </div>);
 };
