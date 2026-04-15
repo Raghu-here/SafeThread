@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Shield, Clock, Lock, Heart, ChevronRight, PenLine, Layers, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import Button from "@/components/Button";
+import { UniquePointsSection } from "../components/UniquePointsSection";
 
 const FeatureCard = ({ icon: Icon, title, description }) =>
   <motion.div
@@ -43,6 +44,10 @@ export const LandingPage = () => {
     document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const scrollToDifference = () => {
+    document.getElementById("difference")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-warm-white selection:bg-terracotta/20 selection:text-forest">
       {/* Hero Section */}
@@ -69,6 +74,9 @@ export const LandingPage = () => {
               </Link>
               <Button variant="outline" size="lg" onClick={scrollToHowItWorks}>
                 How it works
+              </Button>
+              <Button variant="outline" size="lg" onClick={scrollToDifference}>
+                Our Difference
               </Button>
             </div>
           </motion.div>
@@ -161,6 +169,9 @@ export const LandingPage = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Unique Points & Difference Section */}
+      <UniquePointsSection id="difference" />
 
       {/* Footer */}
       <footer className="py-12 px-6 border-t border-silver-sage/20 text-center">
