@@ -1,28 +1,15 @@
 import bcrypt from "bcryptjs";
 import prisma from '../lib/prisma.js';
 import { generateToken, generateRefreshToken, verifyRefreshToken } from '../lib/auth.js';
-import { z } from 'zod';
-
-const LocalLoginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6)
-});
-
-const LocalRegisterSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
-  name: z.string().optional()
-});
+import { LoginSchema, RegisterSchema } from "@safethread/shared";
 
 export const register = async (req, res) => {
   try {
     console.log('[Register] Incoming Body:', req.body);
-    const validatedData = LocalRegisterSchema.parse(req.body);
+    const validatedData = RegisterSchema.parse(req.body);
     console.log('[Register] Validated Data:', validatedData);
 
-    if (!validatedData.email) throw new Error("Email is required");
-
-    const existingUser = await prisma.user.findFirst({
+    const existingUser = await prisma.user.findUnique({
       where: { email: validatedData.email }
     });
 
@@ -70,12 +57,10 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     console.log('[Login] Incoming Body:', req.body);
-    const validatedData = LocalLoginSchema.parse(req.body);
+    const validatedData = LoginSchema.parse(req.body);
     console.log('[Login] Validated Data:', validatedData);
 
-    if (!validatedData.email) throw new Error("Email is required");
-
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: { email: validatedData.email }
     });
 
