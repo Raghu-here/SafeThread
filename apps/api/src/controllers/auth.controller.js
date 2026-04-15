@@ -6,7 +6,9 @@ import { LoginSchema, RegisterSchema } from "@safethread/shared";
 
 export const register = async (req, res) => {
   try {
+    console.log('[Register] Incoming Body:', req.body);
     const validatedData = RegisterSchema.parse(req.body);
+    console.log('[Register] Validated Data:', validatedData);
 
     const existingUser = await prisma.user.findUnique({
       where: { email: validatedData.email }
@@ -44,14 +46,20 @@ export const register = async (req, res) => {
       user: { id: user.id, email: user.email, name: user.name }
     });
   } catch (error) {
-    console.error('Register error:', error);
-    res.status(400).json({ message: error.message || "We had trouble creating your space. Please check your details and try again." });
+    console.error('[Register] Critical Error:', error);
+    if (error.code) console.error('[Register] Prisma Error Code:', error.code);
+    res.status(400).json({ 
+      message: error.message || "We had trouble creating your space.",
+      debug: error.code || 'VALIDATION_ERROR' 
+    });
   }
 };
 
 export const login = async (req, res) => {
   try {
+    console.log('[Login] Incoming Body:', req.body);
     const validatedData = LoginSchema.parse(req.body);
+    console.log('[Login] Validated Data:', validatedData);
 
     const user = await prisma.user.findUnique({
       where: { email: validatedData.email }
