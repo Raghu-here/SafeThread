@@ -57,7 +57,7 @@ export const LandingPage = () => {
               <span className="italic text-terracotta">holds a truth.</span>
             </h1>
             <p className="text-xl md:text-2xl text-sage font-sans max-w-2xl mx-auto mb-12 leading-relaxed">
-              SafeThread helps you preserve traumatic memories non-linearly,
+              SafeThread helps you preserve delicate memories as they are,
               securing them into a chronological timeline for when you're ready.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -136,8 +136,8 @@ export const LandingPage = () => {
               isLast={false} />
             <HowStep
               number="4" icon={Download}
-              title="Export when you're ready"
-              description="When the time comes, generate a legal-grade chronological document of your full timeline — ready for counselors, advocates, or legal proceedings."
+              title="A clear record, when you're ready"
+              description="When the time comes, generate a secure chronological document of your full timeline — a gentle way to share your story with counselors or advocates."
               isLast={true} />
           </div>
         </div>
@@ -155,7 +155,7 @@ export const LandingPage = () => {
               "Healing isn't linear, <br /> but your story can be."
             </h2>
             <p className="text-sage font-sans max-w-xl mx-auto mt-6 leading-relaxed">
-              We understand that trauma shatters memory. SafeThread exists to hold the pieces
+              We understand that painful events can scatter memory. SafeThread exists to hold the pieces
               together, providing a dignified space to document your truth at your own pace.
             </p>
           </motion.div>
