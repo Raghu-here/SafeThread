@@ -1,0 +1,102 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  name          String?
+  emailVerified Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  memories      MemoryCard[]
+  refreshTokens RefreshToken[]
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+
+
+model MemoryCard {
+  id             String             @id @default(uuid())
+  userId         String
+  user           User               @relation(fields: [userId], references: [id])
+  content        String
+  eventDate      DateTime?
+  eventTime      String?
+  dateConfidence String
+  submittedAt    DateTime           @default(now())
+  isSuperseded   Boolean            @default(false)
+  supersedesId   String?            @unique
+  supersedes     MemoryCard?        @relation("Corrections", fields: [supersedesId], references: [id])
+  supersededBy   MemoryCard?        @relation("Corrections")
+  hash           String
+  audioData      String?
+  transcript     String?
+  tags           MemoryCardTag[]
+  attachments    MemoryAttachment[]
+  timelineEntry  TimelineEntry?
+}
+
+model Tag {
+  id       String          @id @default(uuid())
+  name     String          @unique
+  type     String
+  memories MemoryCardTag[]
+}
+
+model MemoryCardTag {
+  memoryCardId String
+  memoryCard   MemoryCard @relation(fields: [memoryCardId], references: [id])
+  tagId        String
+  tag          Tag        @relation(fields: [tagId], references: [id])
+
+  @@id([memoryCardId, tagId])
+}
+
+model MemoryAttachment {
+  id           String     @id @default(uuid())
+  memoryCardId String
+  memoryCard   MemoryCard @relation(fields: [memoryCardId], references: [id])
+  type         String // e.g., "audio/wav"
+  url          String
+  transcript   String?
+  createdAt    DateTime   @default(now())
+}
+
+model Timeline {
+  id      String          @id @default(uuid())
+  userId  String
+  entries TimelineEntry[]
+}
+
+model TimelineEntry {
+  id           String     @id @default(uuid())
+  timelineId   String
+  timeline     Timeline   @relation(fields: [timelineId], references: [id])
+  memoryCardId String     @unique
+  memoryCard   MemoryCard @relation(fields: [memoryCardId], references: [id])
+  order        Int
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String
+  action    String
+  entityId  String
+  timestamp DateTime @default(now())
+  metadata  String?
+}

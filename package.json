@@ -1,0 +1,34 @@
+{
+  "name": "safethread",
+  "version": "1.0.0",
+  "description": "#\u0000 \u0000S\u0000a\u0000f\u0000e\u0000T\u0000h\u0000r\u0000e\u0000a\u0000d\u0000\r\u0000 \u0000",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build --workspaces --if-present",
+    "dev": "concurrently \"npm run dev -w apps/api\" \"npm run dev -w apps/web\"",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raghu-here/SafeThread.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.1.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Raghu-here/SafeThread/issues"
+  },
+  "homepage": "https://github.com/Raghu-here/SafeThread#readme"
+}
