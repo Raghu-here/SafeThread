@@ -162,14 +162,14 @@ export const TimelinePage = () => {
   return (
     <div className="min-h-screen bg-warm-white flex">
       <Sidebar />
-      <main className="flex-1 ml-72 p-12">
+      <main className="flex-1 md:ml-72 p-4 md:p-12">
         <div className="max-w-4xl mx-auto">
-          <header className="flex items-center justify-between mb-20">
+          <header className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between mb-12 md:mb-20">
             <div>
               <h1 className="text-4xl text-forest font-serif mb-2">My Timeline</h1>
               <p className="text-sage font-sans italic">Your story, woven back together.</p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3">
               <Button className="gap-2" onClick={handleGenerateLegalDoc}>
                 <FileText size={18} />
                 Memory Ledger

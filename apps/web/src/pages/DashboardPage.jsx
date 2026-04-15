@@ -21,7 +21,7 @@ export const DashboardPage = () => {
   return (
     <div className="min-h-screen bg-warm-white flex">
       <Sidebar />
-      <main className="flex-1 ml-72 p-12">
+      <main className="flex-1 md:ml-72 p-4 md:p-12">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

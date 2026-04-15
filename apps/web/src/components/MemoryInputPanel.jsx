@@ -192,7 +192,7 @@ export const MemoryInputPanel = ({ onSaved }) => {
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
-    <div className="bg-blush/20 backdrop-blur-md rounded-[2.5rem] p-8 border border-silver-sage shadow-sm">
+    <div className="bg-blush/20 backdrop-blur-md rounded-[2.5rem] p-5 md:p-8 border border-silver-sage shadow-sm">
       <div className="flex items-center gap-2 mb-8 text-forest/70">
         <div className="p-2 bg-warm-white rounded-xl">
           <Type size={20} />

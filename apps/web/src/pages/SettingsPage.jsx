@@ -54,7 +54,7 @@ export const SettingsPage = () => {
   return (
     <div className="min-h-screen bg-warm-white flex">
       <Sidebar />
-      <main className="flex-1 ml-72 p-12">
+      <main className="flex-1 md:ml-72 p-4 md:p-12">
         <div className="max-w-4xl mx-auto space-y-16">
           <header>
             <h1 className="text-4xl text-forest font-serif mb-2">Account Settings</h1>
@@ -98,7 +98,7 @@ export const SettingsPage = () => {
           </SettingsSection>
 
           <SettingsSection title="Data & Storage" icon={HardDrive}>
-            <div className="md:col-span-2 flex items-center justify-between p-6 bg-blush/10 rounded-[2rem] border border-silver-sage/20">
+            <div className="md:col-span-2 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between p-6 bg-blush/10 rounded-[2rem] border border-silver-sage/20">
               <div className="space-y-1">
                 <p className="text-forest font-sans">Timeline Export Status</p>
                 <p className="text-sm text-sage">Download a copy of all your memories.</p>

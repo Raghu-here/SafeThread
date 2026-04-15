@@ -52,7 +52,7 @@ export const LandingPage = () => {
   return (
     <div className="min-h-screen bg-warm-white selection:bg-terracotta/20 selection:text-forest">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-32 pb-24 px-6">
+      <section className="relative overflow-hidden pt-32 pb-24 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
@@ -99,7 +99,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Trust Section */}
-      <section className="py-24 px-6 bg-blush/10 border-y border-silver-sage/20">
+      <section className="py-24 px-4 sm:px-6 bg-blush/10 border-y border-silver-sage/20">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
           <FeatureCard
             icon={Lock}
@@ -117,7 +117,7 @@ export const LandingPage = () => {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-32 px-6">
+      <section id="how-it-works" className="py-32 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -153,7 +153,7 @@ export const LandingPage = () => {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-32 px-6 bg-blush/10 border-t border-silver-sage/20">
+      <section className="py-32 px-4 sm:px-6 bg-blush/10 border-t border-silver-sage/20">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <motion.div
             initial={{ opacity: 0 }}
