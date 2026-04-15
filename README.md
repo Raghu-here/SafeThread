@@ -1,3 +1,4 @@
+
 # SafeThread  
 
 ![SafeThread Logo](https://raw.githubusercontent.com/Raghu-here/SafeThread/main/.github/logo.png)  
@@ -38,6 +39,7 @@ Current version: **0.0.0** (development)
 | **Timeline view** | Chronological API endpoint for rendering a user’s memories | ✅ Stable |
 | **Docker & Docker‑Compose** | One‑command dev and production environments | ✅ Stable |
 | **Tailwind‑CSS UI** | Responsive, dark‑mode ready front‑end built with Vite | ✅ Stable |
+| **Trauma‑Informed UI** (UniquePointsSection) | Highlights SafeThread's non‑linear, brain‑dump approach with visual comparison tables | ✅ Stable |
 | **OpenAPI‑like docs** (planned) | Auto‑generated Swagger UI | 🚧 Beta |
 | **Real‑time updates** (planned) | WebSocket / Server‑Sent Events for live timeline | 🚧 Experimental |
 
@@ -167,7 +169,25 @@ curl -s http://localhost:3000/health | jq
 
 ### 1. Authentication  
 
-```bash
+bash
+# Example: obtain JWT tokens
+curl -X POST http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"user@example.com","password":"yourPassword"}'
+
+
+### 2. Landing Page Overview  
+
+The landing page now includes a **"Why SafeThread is Different"** section that showcases the trauma‑informed UI.  
+Visit the app (e.g., `http://localhost:5173`) and scroll to the **Difference** section or navigate directly to `#difference`.
+
+html
+<!-- Example snippet from the landing page -->
+<UniquePointsSection id="difference" />
+
+
+---  
+
 # Sign‑up
 curl -X POST http://localhost:3000/api/auth/signup \
   -H "Content-Type: application/json" \
