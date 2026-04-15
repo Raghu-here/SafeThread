@@ -20,9 +20,9 @@ export const register = async (req, res) => {
     const validatedData = LocalRegisterSchema.parse(req.body);
     console.log('[Register] Validated Data:', validatedData);
 
-    if (!validatedData.email) throw new Error("Email is required for findUnique");
+    if (!validatedData.email) throw new Error("Email is required");
 
-    const existingUser = await prisma.user.findUnique({
+    const existingUser = await prisma.user.findFirst({
       where: { email: validatedData.email }
     });
 
@@ -73,9 +73,9 @@ export const login = async (req, res) => {
     const validatedData = LocalLoginSchema.parse(req.body);
     console.log('[Login] Validated Data:', validatedData);
 
-    if (!validatedData.email) throw new Error("Email is required for findUnique");
+    if (!validatedData.email) throw new Error("Email is required");
 
-    const user = await prisma.user.findUnique({
+    const user = await prisma.user.findFirst({
       where: { email: validatedData.email }
     });
 
