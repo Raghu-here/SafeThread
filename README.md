@@ -36,7 +36,9 @@ Current version: **0.0.0** (development)
 | **Memory CRUD** | Create and manage personal memories (text and audio) | ✅ Stable |
 | **AI Transcripts** | Integrated transcription for audio memories via OpenAI Whisper | ✅ Stable |
 | **Memory Ledger** | Export a cryptographically sealed text record (.txt) of all entries | ✅ Stable |
-| **Timeline View** | Chronological rendering with audio playback and integrity hashes | ✅ Stable |
+| **Timeline View** | Chronological rendering with monthly grouping, audio playback, and integrity hashes | ✅ Stable |
+| **Search & Filtering** | Filter by memory type and search through content for quick retrieval | ✅ Stable |
+| **Loading States** | Polished skeleton screens for data fetching and transitions | ✅ Stable |
 | **Responsive UI** | Mobile-first sidebar with Zustand state and support resource links | ✅ Stable |
 | **Docker & Docker‑Compose** | One‑command dev and production environments | ✅ Stable |
 | **Tailwind‑CSS UI** | Responsive, trauma-informed front-end built with Vite | ✅ Stable |
@@ -178,6 +180,8 @@ Use the **Dashboard** to record thoughts as they occur.
 ### 3. Navigating the Timeline
 
 The **Timeline** page reconstructs your story chronologically:
+- **Monthly Grouping**: Entries are organized into collapsible monthly sections for better organization and readability.
+- **Search & Filter**: Use the search bar to find specific keywords or filter the view to show only written or audio memories.
 - **Audio Playback**: Listen to your recorded memories and review AI-generated transcripts.
 - **Integrity Hashes**: Each entry displays a unique hash to verify that the record has not been altered.
 - **Exports**: Use the "Memory Ledger" button to generate a formal text record or the "Archive" button to download a JSON backup of your data.
