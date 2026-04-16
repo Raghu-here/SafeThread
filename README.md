@@ -33,6 +33,7 @@ Current version: **0.0.0** (development)
 | Feature | Description | Status |
 |---------|-------------|--------|
 | **User authentication** | Secure JWT + refresh‑token flow, bcrypt password hashing | ✅ Stable |
+| **Onboarding Tour** | Multi-step guided tour explaining immutability, timeline assembly, and legal-grade exports | ✅ Stable |
 | **Memory CRUD** | Create and manage personal memories (text and audio) | ✅ Stable |
 | **Grounding Modal** | Trauma-informed breathing exercise to center users before data entry | ✅ Stable |
 | **Voice-to-Text** | Real-time speech recognition for hands-free memory capture | ✅ Stable |
@@ -168,9 +169,9 @@ curl -s http://localhost:3000/health | jq
 
 ## 📖 Usage
 
-### 1. Authentication & Grounding
+### 1. Authentication, Grounding & Onboarding
 
-Access your secure vault by signing up or logging in. Upon entry, SafeThread presents a **Grounding Modal**—a brief breathing exercise designed to help you center yourself before recording or revisiting memories.
+Access your secure vault by signing up or logging in. Upon entry, SafeThread presents a **Grounding Modal**—a brief breathing exercise designed to help you center yourself. New users are also presented with a multi-step **Onboarding Tour** that introduces the platform's core pillars: immutable records with cryptographic hashes, chronological timeline assembly, and legal-grade document exports.
 
 ### 2. Capturing Memories
 
