@@ -33,7 +33,10 @@ Current version: **0.0.0** (development)
 | Feature | Description | Status |
 |---------|-------------|--------|
 | **User authentication** | Secure JWT + refresh‑token flow, bcrypt password hashing | ✅ Stable |
+| **Onboarding Tour** | Multi-step guided tour explaining immutability, timeline assembly, and legal-grade exports | ✅ Stable |
 | **Memory CRUD** | Create and manage personal memories (text and audio) | ✅ Stable |
+| **Grounding Modal** | Trauma-informed breathing exercise to center users before data entry | ✅ Stable |
+| **Voice-to-Text** | Real-time speech recognition for hands-free memory capture | ✅ Stable |
 | **AI Transcripts** | Integrated transcription for audio memories via OpenAI Whisper | ✅ Stable |
 | **Memory Ledger** | Export a cryptographically sealed text record (.txt) of all entries | ✅ Stable |
 | **Timeline View** | Chronological rendering with monthly grouping, audio playback, and integrity hashes | ✅ Stable |
@@ -166,16 +169,17 @@ curl -s http://localhost:3000/health | jq
 
 ## 📖 Usage
 
-### 1. Authentication
+### 1. Authentication, Grounding & Onboarding
 
-Access your secure vault by signing up or logging in. The system uses a JWT-based flow with refresh tokens to ensure your session remains private and protected.
+Access your secure vault by signing up or logging in. Upon entry, SafeThread presents a **Grounding Modal**—a brief breathing exercise designed to help you center yourself. New users are also presented with a multi-step **Onboarding Tour** that introduces the platform's core pillars: immutable records with cryptographic hashes, chronological timeline assembly, and legal-grade document exports.
 
 ### 2. Capturing Memories
 
 Use the **Dashboard** to record thoughts as they occur.
 - **Text Entries**: Type directly into the input panel to save written memories.
-- **Audio Memories**: Record audio that is automatically transcribed using AI and cryptographically sealed.
-- **Recent Activity**: View your most recent entries and total memory count at a glance.
+- **Voice-to-Text**: Use the microphone icon to transcribe your speech into text in real-time using browser-native recognition.
+- **Audio Recording**: Record raw audio clips that are automatically transcribed using AI and cryptographically sealed.
+- **Contextual Metadata**: Add specific dates, times, confidence levels, and emotional tags to provide depth to your records.
 
 ### 3. Navigating the Timeline
 
