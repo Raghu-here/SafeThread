@@ -1,9 +1,11 @@
 import { Sidebar } from "@/components/Sidebar";
 import { motion } from "framer-motion";
-import { Download, FileText, Volume2 } from "lucide-react";
+import { Download, FileText, Volume2, Search, ChevronDown, ChevronUp } from "lucide-react";
 import Button from "@/components/Button";
+import { SkeletonTimelineNode } from "@/components/Skeleton";
 import { useEffect, useState } from "react";
 import api from "@/api/axios";
+import { AnimatePresence } from "framer-motion";
 
 const isAudioMemory = (memory) =>
   memory.content?.startsWith("[Audio Recording");
@@ -82,10 +84,45 @@ const TimelineNode = ({ memory, isLast }) => {
   );
 };
 
+const MonthGroup = ({ title, entries }) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <div className="mb-12">
+      <button 
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-3 mb-6 group outline-none"
+      >
+        <h2 className="text-xl font-serif text-forest">{title} <span className="text-sage font-sans text-sm tracking-widest uppercase ml-2">• {entries.length} entri{entries.length === 1 ? "y" : "es"}</span></h2>
+        <div className="p-1 rounded-full bg-silver-sage/10 text-sage group-hover:bg-silver-sage/20 transition-colors">
+          {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        </div>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden space-y-4"
+          >
+            {entries.map((m, i) => (
+              <TimelineNode key={m.id} memory={m} isLast={i === entries.length - 1} />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 
 export const TimelinePage = () => {
   const [memories, setMemories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filter, setFilter] = useState("ALL");
 
   useEffect(() => {
     api.get("/memories")
@@ -159,6 +196,33 @@ export const TimelinePage = () => {
     URL.revokeObjectURL(url);
   };
 
+  const filteredMemories = memories.filter((m) => {
+    if (filter === "WRITTEN" && isAudioMemory(m)) return false;
+    if (filter === "AUDIO" && !isAudioMemory(m)) return false;
+    if (filter === "UNDATED" && m.eventDate) return false;
+    
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      return m.content?.toLowerCase().includes(query) || m.transcript?.toLowerCase().includes(query);
+    }
+    return true;
+  });
+
+  const groupedMemories = filteredMemories.reduce((acc, m) => {
+    const key = m.eventDate 
+      ? new Date(m.eventDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+      : "Undated";
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(m);
+    return acc;
+  }, {});
+
+  const sortedKeys = Object.keys(groupedMemories).sort((a, b) => {
+    if (a === "Undated") return 1;
+    if (b === "Undated") return -1;
+    return new Date(b) - new Date(a);
+  });
+
   return (
     <div className="min-h-screen bg-warm-white flex">
       <Sidebar />
@@ -194,18 +258,55 @@ export const TimelinePage = () => {
             </div>
           </header>
 
+          <div className="mb-12 space-y-6">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search your memories..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-warm-white border border-silver-sage/40 rounded-full pl-12 pr-6 py-4 text-forest placeholder:text-sage/60 outline-none focus:border-terracotta transition-colors shadow-sm"
+              />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-sage/60" size={18} />
+            </div>
+            
+            <div className="flex flex-wrap items-center gap-2">
+              {["ALL", "WRITTEN", "AUDIO", "UNDATED"].map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-widest transition-colors ${
+                    filter === f 
+                      ? "bg-forest text-warm-white" 
+                      : "bg-silver-sage/10 text-sage hover:bg-silver-sage/20 border border-transparent hover:border-silver-sage/30"
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+          </div>
+
           {loading ? (
-            <div className="text-center py-24 text-sage font-sans italic">Loading your timeline…</div>
-          ) : memories.length === 0 ? (
+            <div className="space-y-4">
+              <SkeletonTimelineNode />
+              <SkeletonTimelineNode />
+              <SkeletonTimelineNode isLast />
+            </div>
+          ) : filteredMemories.length === 0 ? (
             <div className="text-center py-24 space-y-4">
-              <p className="text-2xl font-serif text-forest italic">Your timeline is waiting.</p>
-              <p className="text-sm text-sage font-sans">Save your first memory from the Dashboard to begin.</p>
+              <p className="text-2xl font-serif text-forest italic">
+                {memories.length === 0 ? "Your timeline is waiting." : "No memories match your search."}
+              </p>
+              <p className="text-sm text-sage font-sans">
+                {memories.length === 0 ? "Save your first memory from the Dashboard to begin." : "Try adjusting your filters or search terms."}
+              </p>
             </div>
           ) : (
-            <div className="space-y-4">
-              {memories.map((m, i) =>
-                <TimelineNode key={m.id} memory={m} isLast={i === memories.length - 1} />
-              )}
+            <div>
+              {sortedKeys.map(key => (
+                <MonthGroup key={key} title={key} entries={groupedMemories[key]} />
+              ))}
             </div>
           )}
 
