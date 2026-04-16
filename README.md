@@ -164,15 +164,15 @@ curl -s http://localhost:3000/health | jq
 
 ---  
 
-## 📖 Usage  
+## 📖 Usage
 
-### 1. Authentication  
+### 1. Authentication
 
 Access your secure vault by signing up or logging in. The system uses a JWT-based flow with refresh tokens to ensure your session remains private and protected.
 
 ### 2. Capturing Memories
 
-Use the **Dashboard** to record thoughts as they occur. 
+Use the **Dashboard** to record thoughts as they occur.
 - **Text Entries**: Type directly into the input panel to save written memories.
 - **Audio Memories**: Record audio that is automatically transcribed using AI and cryptographically sealed.
 - **Recent Activity**: View your most recent entries and total memory count at a glance.
@@ -181,10 +181,10 @@ Use the **Dashboard** to record thoughts as they occur.
 
 The **Timeline** page reconstructs your story chronologically:
 - **Monthly Grouping**: Entries are organized into collapsible monthly sections for better organization and readability.
-- **Search & Filter**: Use the search bar to find specific keywords or filter the view to show only written or audio memories.
+- **Search & Filter**: Use the search bar to find specific keywords or filter the view to show written, audio, or undated memories.
 - **Audio Playback**: Listen to your recorded memories and review AI-generated transcripts.
 - **Integrity Hashes**: Each entry displays a unique hash to verify that the record has not been altered.
-- **Exports**: Use the "Memory Ledger" button to generate a formal text record or the "Archive" button to download a JSON backup of your data.
+- **Legal Ledger Export**: Generate a formal **Chronological Memory Ledger** as a PDF. This document includes entry numbers, timestamps, transcripts, and cryptographic hashes, formatted for use as a verifiable record.
 
 ### 4. Support Resources
 
