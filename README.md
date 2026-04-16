@@ -28,23 +28,20 @@ Current version: **0.0.0** (development)
 
 ---  
 
-## Features  
+## 🛠️ Features  
 
 | Feature | Description | Status |
 |---------|-------------|--------|
-| **User authentication** (sign‑up, login, refresh tokens) | Secure JWT + refresh‑token flow, bcrypt password hashing | ✅ Stable |
-| **Memory CRUD** | Create, read, update, delete personal memories (text, images, PDFs) | ✅ Stable |
-| **File upload** | Direct upload to local storage or AWS S3 via `multer-s3` | ✅ Stable |
-| **PDF generation** | Export a memory thread as a PDF using `pdfkit` | ✅ Stable |
-| **Timeline view** | Chronological API endpoint for rendering a user’s memories | ✅ Stable |
+| **User authentication** | Secure JWT + refresh‑token flow, bcrypt password hashing | ✅ Stable |
+| **Memory CRUD** | Create and manage personal memories (text and audio) | ✅ Stable |
+| **AI Transcripts** | Integrated transcription for audio memories via OpenAI Whisper | ✅ Stable |
+| **Memory Ledger** | Export a cryptographically sealed text record (.txt) of all entries | ✅ Stable |
+| **Timeline View** | Chronological rendering with audio playback and integrity hashes | ✅ Stable |
+| **Responsive UI** | Mobile-first sidebar with Zustand state and support resource links | ✅ Stable |
 | **Docker & Docker‑Compose** | One‑command dev and production environments | ✅ Stable |
-| **Tailwind‑CSS UI** | Responsive, dark‑mode ready front‑end built with Vite | ✅ Stable |
-| **Trauma‑Informed UI** (UniquePointsSection) | Highlights SafeThread's non‑linear, brain‑dump approach with visual comparison tables | ✅ Stable |
-| **OpenAPI‑like docs** (planned) | Auto‑generated Swagger UI | 🚧 Beta |
-| **Real‑time updates** (planned) | WebSocket / Server‑Sent Events for live timeline | 🚧 Experimental |
+| **Tailwind‑CSS UI** | Responsive, trauma-informed front-end built with Vite | ✅ Stable |
 
----  
-
+---
 ## Tech Stack  
 
 | Layer | Technology | Reason |
@@ -165,11 +162,29 @@ curl -s http://localhost:3000/health | jq
 
 ---  
 
-## Usage  
+## 📖 Usage  
 
 ### 1. Authentication  
 
-bash
+Access your secure vault by signing up or logging in. The system uses a JWT-based flow with refresh tokens to ensure your session remains private and protected.
+
+### 2. Capturing Memories
+
+Use the **Dashboard** to record thoughts as they occur. 
+- **Text Entries**: Type directly into the input panel to save written memories.
+- **Audio Memories**: Record audio that is automatically transcribed using AI and cryptographically sealed.
+- **Recent Activity**: View your most recent entries and total memory count at a glance.
+
+### 3. Navigating the Timeline
+
+The **Timeline** page reconstructs your story chronologically:
+- **Audio Playback**: Listen to your recorded memories and review AI-generated transcripts.
+- **Integrity Hashes**: Each entry displays a unique hash to verify that the record has not been altered.
+- **Exports**: Use the "Memory Ledger" button to generate a formal text record or the "Archive" button to download a JSON backup of your data.
+
+### 4. Support Resources
+
+SafeThread is designed with a trauma-informed approach. The sidebar provides immediate access to the **RAINN** support network and the **988** crisis line for users in need of assistance.
 # Example: obtain JWT tokens
 curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
