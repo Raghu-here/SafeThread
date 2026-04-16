@@ -6,10 +6,12 @@ import { TimelinePage } from "./pages/TimelinePage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { NotFound } from "./pages/NotFound";
 import { UniquePointsPage } from "./pages/UniquePointsPage";
+import { QuickExit } from "./components/QuickExit";
 
 export const App = () => {
   return (
     <Router>
+      <QuickExit />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<AuthPage />} />

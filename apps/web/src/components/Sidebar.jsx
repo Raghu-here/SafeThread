@@ -1,4 +1,4 @@
-import { LayoutDashboard, Clock, Settings, LogOut, ShieldCheck, Menu, X } from "lucide-react";
+import { LayoutDashboard, Clock, Settings, LogOut, ShieldCheck, Menu, X, HeartHandshake } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -98,6 +98,19 @@ export const Sidebar = () => {
             <LogOut size={20} />
             <span>Sign Out</span>
           </button>
+          
+          <div className="px-4 py-2 border-t border-silver-sage/20">
+            <a 
+              href="https://www.rainn.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-2 py-1 text-sage/80 hover:text-forest transition-colors mt-2"
+            >
+              <HeartHandshake size={16} />
+              <span className="text-xs font-sans">Need support?</span>
+            </a>
+            <p className="px-2 mt-1 text-[10px] font-mono text-sage/60">Crisis line: 988</p>
+          </div>
         </div>
       </div>
     </>);
