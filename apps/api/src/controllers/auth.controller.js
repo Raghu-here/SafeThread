@@ -152,6 +152,19 @@ export const changePassword = async (req, res) => {
   }
 };
 
+export const updateProfile = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const user = await prisma.user.update({
+      where: { id: req.user.userId },
+      data: { name }
+    });
+    res.json({ message: "Profile updated.", user: { id: user.id, email: user.email, name: user.name } });
+  } catch (_) {
+    res.status(500).json({ message: "Could not update profile." });
+  }
+};
+
 export const deleteAccount = async (req, res) => {
   try {
     const userId = req.user.userId;

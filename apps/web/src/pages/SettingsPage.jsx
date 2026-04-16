@@ -1,5 +1,5 @@
 import { Sidebar } from "@/components/Sidebar";
-import { User, Shield, HardDrive, Key } from "lucide-react";
+import { User, Shield, HardDrive, Key, Edit2, Check } from "lucide-react";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -21,11 +21,21 @@ const SettingsSection = ({ title, icon: Icon, children }) =>
   </div>;
 
 export const SettingsPage = () => {
-  const { user, clearAuth } = useAuthStore();
+  const { user, clearAuth, setAuth, accessToken, refreshToken } = useAuthStore();
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState("");
   const [pwStatus, setPwStatus] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [newName, setNewName] = useState(user?.name || "");
+
+  const handleSaveName = async () => {
+    try {
+      const res = await api.patch("/auth/update-profile", { name: newName });
+      setAuth(res.data.user, accessToken, refreshToken);
+      setIsEditingName(false);
+    } catch {}
+  };
 
   const handleChangePassword = async () => {
     if (!newPassword || newPassword.length < 6) {
@@ -62,7 +72,26 @@ export const SettingsPage = () => {
           </header>
 
           <SettingsSection title="Personal Information" icon={User}>
-            <Input label="Display Name" placeholder={user?.name || "Your name"} disabled />
+            <div className="flex items-end gap-2">
+              <div className="flex-1">
+                <Input 
+                  label="Display Name" 
+                  value={isEditingName ? newName : (user?.name || "")} 
+                  placeholder={isEditingName ? "Your name" : user?.name || "Your name"}
+                  onChange={(e) => setNewName(e.target.value)}
+                  disabled={!isEditingName} 
+                />
+              </div>
+              {isEditingName ? (
+                <Button onClick={handleSaveName} className="mb-1 w-[46px] h-[46px] p-0 flex items-center justify-center shrink-0">
+                  <Check size={18} />
+                </Button>
+              ) : (
+                <Button variant="outline" onClick={() => setIsEditingName(true)} className="mb-1 w-[46px] h-[46px] p-0 flex items-center justify-center shrink-0">
+                  <Edit2 size={18} />
+                </Button>
+              )}
+            </div>
             <Input label="Email Address" type="email" placeholder={user?.email || "email@example.com"} disabled />
           </SettingsSection>
 
