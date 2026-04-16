@@ -47,24 +47,23 @@ Current version: **0.0.0** (development)
 | **Tailwind‑CSS UI** | Responsive, trauma-informed front-end built with Vite | ✅ Stable |
 
 ---
-## Tech Stack  
+## 🛠️ Tech Stack
 
 | Layer | Technology | Reason |
 |-------|------------|--------|
-| **Runtime** | Node.js 20 (ESM) | Modern JavaScript, native ESM support |
-| **Web framework** | Express 4 | Minimal, battle‑tested HTTP server |
-| **Database** | PostgreSQL (via Prisma 5) | Type‑safe ORM, migrations, schema‑first |
+| **Runtime** | Node.js 20 (ESM) | Modern JavaScript, native ESM support |
+| **Web framework** | Express 4 | Minimal, battle‑tested HTTP server |
+| **Database** | PostgreSQL (via Prisma 5) | Type‑safe ORM, migrations, schema‑first |
 | **Auth** | jsonwebtoken, bcryptjs | Stateless JWT + secure password hashing |
 | **File storage** | multer, multer‑s3, AWS SDK | Streamed uploads, optional S3 backend |
-| **PDF** | pdfkit | Server‑side PDF generation |
+| **PDF** | pdfkit, jspdf | Server‑side and client‑side PDF generation |
 | **Validation** | zod | Declarative schema validation |
-| **Front‑end** | Vite 5, React (via Vite template), Tailwind‑CSS | Fast dev server, utility‑first styling |
+| **Front‑end** | Vite 5, React (via Vite template), Tailwind‑CSS | Fast dev server, utility‑first styling |
 | **Containerisation** | Docker, Docker‑Compose | Consistent dev/prod environments |
 | **CI/CD** | GitHub Actions (build, test, lint) | Automated quality gates |
 | **Shared code** | `@safethread/shared` (workspace package) | Re‑usable types & utilities across apps |
 
----  
-
+---
 ## Architecture  
 
 ```
@@ -92,9 +91,9 @@ SafeThread/
 
 ---  
 
-## Getting Started  
+## 🚀 Getting Started
 
-### Prerequisites  
+### Prerequisites
 
 | Tool | Minimum version |
 |------|-----------------|
@@ -104,24 +103,27 @@ SafeThread/
 | PostgreSQL | 14 (local or remote) |
 | (Optional) AWS credentials | Access key + secret for S3 uploads |
 
-### Installation  
+### Installation
 
-#### 1. Clone the repository  
+#### 1. Clone the repository
 
-```bash
+bash
 git clone https://github.com/Raghu-here/SafeThread.git
 cd SafeThread
-```
 
-#### 2. Install workspace dependencies  
 
-```bash
+#### 2. Install workspace dependencies
+
+bash
 npm install   # installs root + all packages (api, web, shared)
-```
 
-#### 3. Set up environment variables  
 
-```bash
+#### 3. Set up environment variables
+
+bash
+
+
+---
 # API
 cp apps/api/.env.example apps/api/.env
 # Edit the file and provide real values (see the table below)
