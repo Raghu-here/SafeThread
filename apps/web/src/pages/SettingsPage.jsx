@@ -54,7 +54,7 @@ export const SettingsPage = () => {
   return (
     <div className="min-h-screen bg-warm-white flex">
       <Sidebar />
-      <main className="flex-1 md:ml-72 p-4 md:p-12">
+      <main className="flex-1 lg:ml-72 p-4 md:p-12">
         <div className="max-w-4xl mx-auto space-y-16">
           <header>
             <h1 className="text-4xl text-forest font-serif mb-2">Account Settings</h1>

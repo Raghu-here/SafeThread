@@ -1,6 +1,8 @@
-import { motion } from "framer-motion";
-import { Lock, Tag as TagIcon, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Lock, Tag as TagIcon, AlertCircle, X, CheckCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import api from "@/api/axios";
 
 
 
@@ -19,6 +21,35 @@ import { cn } from "@/lib/utils";
 
 export const MemoryCard = ({ memory, index }) => {
   const hashSnippet = memory.hash.substring(0, 8) + "..." + memory.hash.substring(memory.hash.length - 4);
+  const [isCorrecting, setIsCorrecting] = useState(false);
+  const [correctionContent, setCorrectionContent] = useState("");
+  const [correctionDate, setCorrectionDate] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleCorrectionSubmit = async (e) => {
+    e.preventDefault();
+    if (!correctionContent.trim() || !correctionDate) return;
+    setIsSubmitting(true);
+    try {
+      await api.post("/memories", {
+        content: correctionContent,
+        eventDate: new Date(correctionDate).toISOString(),
+        dateConfidence: "CERTAIN",
+        supersedesId: memory.id
+      });
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+        setIsCorrecting(false);
+        window.location.reload();
+      }, 2000);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <motion.div
@@ -66,10 +97,87 @@ export const MemoryCard = ({ memory, index }) => {
           <span>{hashSnippet}</span>
         </div>
         
-        <button className="text-[10px] text-sage hover:text-terracotta transition-colors font-sans uppercase tracking-[0.1em] border-b border-transparent hover:border-terracotta">
-          File Correction
-        </button>
+        {!memory.isSuperseded && (
+          <button 
+            onClick={() => setIsCorrecting(true)}
+            className="text-[10px] text-sage hover:text-terracotta transition-colors font-sans uppercase tracking-[0.1em] border-b border-transparent hover:border-terracotta">
+            File Correction
+          </button>
+        )}
       </div>
+
+      <AnimatePresence>
+        {isCorrecting && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-forest/40 backdrop-blur-sm"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              transition={{ ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="w-full max-w-lg bg-warm-white p-8 rounded-[2rem] border border-silver-sage/30 relative"
+            >
+              <button 
+                onClick={() => !isSubmitting && !showSuccess && setIsCorrecting(false)}
+                className="absolute top-6 right-6 text-sage hover:text-forest transition-colors"
+              >
+                <X size={24} />
+              </button>
+
+              {showSuccess ? (
+                <div className="flex flex-col items-center justify-center text-center space-y-4 py-8">
+                  <CheckCircle size={48} className="text-terracotta" />
+                  <p className="text-2xl font-serif text-forest">Correction filed and sealed.</p>
+                  <p className="text-sm font-sans text-sage">The original record has been marked as superseded.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleCorrectionSubmit} className="space-y-6">
+                  <div>
+                    <h3 className="text-2xl font-serif text-forest mb-2">File a Correction</h3>
+                    <p className="text-sm font-sans text-sage mb-6">
+                      This will create a new interconnected memory. The original entry will remain sealed but will be marked as superseded.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono text-sage uppercase tracking-wider">What is the correction?</label>
+                    <textarea 
+                      required
+                      value={correctionContent}
+                      onChange={(e) => setCorrectionContent(e.target.value)}
+                      className="w-full bg-warm-white border border-silver-sage/40 rounded-2xl p-4 text-forest placeholder:text-sage/50 outline-none focus:border-terracotta transition-colors min-h-[120px]"
+                      placeholder="Detail the corrected information..."
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-mono text-sage uppercase tracking-wider">Date of Correction</label>
+                    <input 
+                      type="date"
+                      required
+                      value={correctionDate}
+                      onChange={(e) => setCorrectionDate(e.target.value)}
+                      className="w-full bg-warm-white border border-silver-sage/40 rounded-full px-5 py-3 text-forest outline-none focus:border-terracotta transition-colors font-mono text-sm"
+                    />
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full bg-forest text-warm-white py-4 rounded-full font-sans shadow-md hover:bg-forest/90 transition-all timeline-breath disabled:opacity-50"
+                  >
+                    {isSubmitting ? "Sealing..." : "Seal Correction"}
+                  </button>
+                </form>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>);
 
 };
