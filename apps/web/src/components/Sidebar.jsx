@@ -2,8 +2,9 @@ import { LayoutDashboard, Clock, Settings, LogOut, ShieldCheck, Menu, X, HeartHa
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/store/useAuthStore";
+import { useSidebarStore } from "@/store/useSidebarStore";
 import api from "@/api/axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const NavLink = ({ to, icon: Icon, label, onClick }) => {
   const location = useLocation();
@@ -26,14 +27,14 @@ const NavLink = ({ to, icon: Icon, label, onClick }) => {
 
 export const Sidebar = () => {
   const { user, refreshToken, clearAuth } = useAuthStore();
+  const { isOpen, setIsOpen } = useSidebarStore();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
     setIsOpen(false);
-  }, [pathname]);
+  }, [pathname, setIsOpen]);
 
   const handleSignOut = async () => {
     try {
@@ -50,14 +51,14 @@ export const Sidebar = () => {
       {/* Mobile Hamburger */}
       <button
         onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-40 p-2.5 bg-warm-white/80 backdrop-blur-lg border border-silver-sage/30 rounded-2xl text-forest shadow-sm hover:bg-warm-white transition-all">
+        className="lg:hidden fixed top-4 left-4 z-40 p-2.5 bg-warm-white/80 backdrop-blur-lg border border-silver-sage/30 rounded-2xl text-forest shadow-sm hover:bg-warm-white transition-all">
         <Menu size={24} />
       </button>
 
       {/* Backdrop */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-forest/20 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300"
+          className="fixed inset-0 bg-forest/20 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -65,7 +66,7 @@ export const Sidebar = () => {
       {/* Sidebar Drawer */}
       <div className={cn(
         "w-72 h-screen fixed left-0 top-0 border-r border-silver-sage p-8 flex flex-col bg-warm-white/95 backdrop-blur-lg z-50 transition-transform duration-300 ease-in-out",
-        isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
       )}>
         <div className="flex items-center justify-between mb-12 px-4">
           <div className="flex items-center gap-2">
@@ -74,7 +75,7 @@ export const Sidebar = () => {
           </div>
           <button 
             onClick={() => setIsOpen(false)}
-            className="md:hidden p-1 text-sage hover:text-forest">
+            className="lg:hidden p-1 text-sage hover:text-forest">
             <X size={20} />
           </button>
         </div>

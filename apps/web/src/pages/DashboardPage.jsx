@@ -8,20 +8,23 @@ import api from "@/api/axios";
 
 export const DashboardPage = () => {
   const user = useAuthStore((s) => s.user);
-  const [memoryCount, setMemoryCount] = useState("—");
+  const [memories, setMemories] = useState([]);
 
   useEffect(() => {
     api.get("/memories")
-      .then((res) => setMemoryCount(res.data?.length ?? 0))
-      .catch(() => setMemoryCount(0));
+      .then((res) => setMemories(res.data || []))
+      .catch(() => setMemories([]));
   }, []);
+
+  const sortedMemories = [...memories].sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+  const recentMemories = sortedMemories.slice(0, 3);
 
   const greeting = user?.name ? `Welcome back, ${user.name}.` : "Your Safe Space";
 
   return (
     <div className="min-h-screen bg-warm-white flex">
       <Sidebar />
-      <main className="flex-1 md:ml-72 p-4 md:p-12">
+      <main className="flex-1 lg:ml-72 p-4 md:p-12">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -40,18 +43,38 @@ export const DashboardPage = () => {
           </section>
 
           {/* Right Column: Stats */}
-          <section className="space-y-8">
-            <div className="bg-blush/10 rounded-[2.5rem] p-8 border border-silver-sage/30 h-full flex flex-col items-center justify-center text-center space-y-6">
-              <div className="w-16 h-16 bg-warm-white rounded-2xl flex items-center justify-center text-terracotta border border-silver-sage/50">
-                <Lock size={32} />
-              </div>
-              <div>
-                <h3 className="text-2xl text-forest font-serif mb-2">Secure Entries</h3>
-                <p className="text-4xl font-mono text-forest">{memoryCount}</p>
-              </div>
-              <p className="text-xs text-sage font-sans uppercase tracking-[0.2em] max-w-[200px]">
-                Chronologically ordered and cryptographically signed
-              </p>
+          <section className="space-y-6">
+            <header className="flex items-center justify-between">
+              <h2 className="text-2xl text-forest font-serif">Recent Memories</h2>
+              <span className="font-mono text-xs bg-silver-sage/20 text-sage px-2 py-1 rounded-full">{memories.length} entries</span>
+            </header>
+            
+            <div className="bg-blush/10 rounded-[2.5rem] p-6 border border-silver-sage/30 h-full min-h-[400px]">
+              {recentMemories.length === 0 ? (
+                <div className="flex flex-col items-center justify-center h-full text-center space-y-4 pt-12">
+                  <div className="w-16 h-16 bg-warm-white rounded-2xl flex items-center justify-center text-terracotta border border-silver-sage/50">
+                    <Lock size={32} />
+                  </div>
+                  <h3 className="text-xl text-forest font-serif mb-2">Secure Entries</h3>
+                  <p className="text-sage font-sans italic max-w-[200px]">Your timeline is waiting. Save a memory to begin.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {recentMemories.map(m => (
+                    <div key={m.id} className="bg-warm-white p-4 rounded-3xl border border-silver-sage/30 hover:border-terracotta/30 transition-colors">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] font-mono text-sage uppercase tracking-widest bg-sage/5 px-2 py-1 rounded-full">
+                          {m.eventDate ? new Date(m.eventDate).toLocaleDateString() : "Undated"}
+                        </span>
+                        <span className="text-[10px] font-mono text-sage/50 italic">#{m.hash.substring(0, 6)}</span>
+                      </div>
+                      <p className="text-sm text-forest font-sans">
+                        {m.content?.substring(0, 80)}{m.content?.length > 80 ? "..." : ""}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
         </motion.div>

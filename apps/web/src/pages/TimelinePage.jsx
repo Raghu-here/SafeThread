@@ -162,7 +162,7 @@ export const TimelinePage = () => {
   return (
     <div className="min-h-screen bg-warm-white flex">
       <Sidebar />
-      <main className="flex-1 md:ml-72 p-4 md:p-12">
+      <main className="flex-1 lg:ml-72 p-4 md:p-12">
         <div className="max-w-4xl mx-auto">
           <header className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between mb-12 md:mb-20">
             <div>
