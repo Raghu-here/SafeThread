@@ -1,5 +1,7 @@
 import { Sidebar } from "@/components/Sidebar";
 import { MemoryInputPanel } from "@/components/MemoryInputPanel";
+import { GroundingModal } from "@/components/GroundingModal";
+import { OnboardingModal } from "@/components/OnboardingModal";
 import { motion } from "framer-motion";
 import { Lock } from "lucide-react";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -11,9 +13,15 @@ export const DashboardPage = () => {
   const [memories, setMemories] = useState([]);
 
   useEffect(() => {
-    api.get("/memories")
-      .then((res) => setMemories(res.data || []))
-      .catch(() => setMemories([]));
+    const fetchMemories = () => {
+      api.get("/memories")
+        .then((res) => setMemories(res.data || []))
+        .catch(() => setMemories([]));
+    };
+    fetchMemories();
+    
+    window.addEventListener("memorySaved", fetchMemories);
+    return () => window.removeEventListener("memorySaved", fetchMemories);
   }, []);
 
   const sortedMemories = [...memories].sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
@@ -23,6 +31,8 @@ export const DashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-warm-white flex">
+      <GroundingModal />
+      <OnboardingModal />
       <Sidebar />
       <main className="flex-1 lg:ml-72 p-4 md:p-12">
         <motion.div
