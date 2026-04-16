@@ -60,8 +60,13 @@ export const createMemory = async (req, res) => {
           audioData,
           transcript,
           tags: {
-            create: validatedData.tags?.map((tagId) => ({
-              tag: { connect: { id: tagId } }
+            create: validatedData.tags?.map((tagName) => ({
+              tag: {
+                connectOrCreate: {
+                  where: { name: tagName },
+                  create: { name: tagName, type: "user" }
+                }
+              }
             }))
           }
         },

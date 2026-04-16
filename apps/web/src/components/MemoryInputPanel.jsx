@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Type, Save, Calendar, ChevronDown, Mic, Square, Play, Trash2, Upload } from "lucide-react";
+import { Type, Save, Calendar, ChevronDown, Mic, Square, Play, Trash2, Upload, X } from "lucide-react";
 import Button from "@/components/Button";
 import { cn } from "@/lib/utils";
 import api from "@/api/axios";
@@ -13,12 +13,17 @@ export const MemoryInputPanel = ({ onSaved }) => {
   const [saveStatus, setSaveStatus] = useState(null); // 'ok' | 'err'
 
   // Date/time/confidence
-  const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [confidence, setConfidence] = useState("APPROXIMATE");
 
+  // Tags & Emotions
+  const [tags, setTags] = useState([]);
+  const [tagInput, setTagInput] = useState("");
+  const [selectedEmotion, setSelectedEmotion] = useState(null);
+
   // Voice-to-text
   const [isListening, setIsListening] = useState(false);
+  const [sttLang, setSttLang] = useState("en-US");
   const recognitionRef = useRef(null);
 
   // Audio recording — key fix: use STATE for audioBlob so React can react to it
@@ -40,7 +45,7 @@ export const MemoryInputPanel = ({ onSaved }) => {
     }
     const recognition = new SpeechRec();
     recognitionRef.current = recognition;
-    recognition.lang = "en-US";
+    recognition.lang = sttLang;
     recognition.interimResults = true;
     recognition.continuous = true;
     recognition.onresult = (event) => {
@@ -143,12 +148,15 @@ export const MemoryInputPanel = ({ onSaved }) => {
           eventTime: time || undefined,
           dateConfidence: confidence,
           audioData: base64,          // ← stored in DB
+          tags: selectedEmotion ? [...tags, selectedEmotion] : tags,
         });
         setSaveStatus("ok");
         setContent(""); setDate(""); setTime(""); setConfidence("APPROXIMATE");
+        setTags([]); setSelectedEmotion(null); setTagInput("");
         setShowDetails(false);
         discardRecording();
         onSaved?.();
+        window.dispatchEvent(new Event("memorySaved"));
         setTimeout(() => setSaveStatus(null), 3000);
       } catch {
         setSaveStatus("err");
@@ -167,15 +175,20 @@ export const MemoryInputPanel = ({ onSaved }) => {
         eventDate: date || undefined,
         eventTime: time || undefined,
         dateConfidence: confidence,
+        tags: selectedEmotion ? [...tags, selectedEmotion] : tags,
       });
       setSaveStatus("ok");
       setContent("");
       setDate("");
       setTime("");
       setConfidence("APPROXIMATE");
+      setTags([]);
+      setSelectedEmotion(null);
+      setTagInput("");
       setShowDetails(false);
       discardRecording();
       onSaved?.();
+      window.dispatchEvent(new Event("memorySaved"));
       setTimeout(() => setSaveStatus(null), 3000);
     } catch {
       setSaveStatus("err");
@@ -234,20 +247,85 @@ export const MemoryInputPanel = ({ onSaved }) => {
             className="w-full min-h-[200px] bg-warm-white/40 border-none rounded-3xl p-6 font-serif text-lg leading-relaxed text-forest placeholder:italic placeholder:text-sage/40 focus:ring-2 focus:ring-terracotta/20 transition-all resize-none timeline-breath" />
 
           {mode === "stt" && (
-            <div className="flex justify-center mt-4">
+            <div className="flex flex-col items-center gap-3 mt-4">
+              <select
+                value={sttLang}
+                onChange={(e) => setSttLang(e.target.value)}
+                className="text-xs bg-warm-white border border-silver-sage/40 rounded-full px-3 py-1.5 outline-none text-forest focus:border-terracotta transition-colors shadow-sm"
+              >
+                <option value="en-US">English (en-US)</option>
+                <option value="hi-IN">Hindi (hi-IN)</option>
+                <option value="es-ES">Spanish (es-ES)</option>
+                <option value="fr-FR">French (fr-FR)</option>
+                <option value="de-DE">German (de-DE)</option>
+                <option value="ar-SA">Arabic (ar-SA)</option>
+                <option value="zh-CN">Mandarin (zh-CN)</option>
+              </select>
               <button
                 onClick={isListening ? stopListening : startListening}
                 className={cn(
-                  "flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-sans transition-all border",
+                  "flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-sans transition-all border shadow-sm",
                   isListening
                     ? "bg-terracotta text-warm-white border-terracotta animate-pulse"
-                    : "bg-warm-white text-forest border-silver-sage hover:border-terracotta"
+                    : "bg-warm-white text-forest border-silver-sage hover:border-terracotta hover:bg-warm-white/80"
                 )}>
                 <Mic size={16} />
                 {isListening ? "Stop Listening" : "Start Listening"}
               </button>
             </div>
           )}
+          
+          <div className="mt-6 space-y-5">
+            <div className="flex flex-wrap gap-2 items-center">
+              {tags.map(t => (
+                <span key={t} className="flex items-center gap-1 bg-terracotta/10 text-terracotta px-3 py-1 rounded-full text-xs font-sans border border-terracotta/20">
+                  #{t}
+                  <button onClick={() => setTags(tags.filter(x => x !== t))} className="hover:text-terracotta/70 ml-1 outline-none">
+                    <X size={12} />
+                  </button>
+                </span>
+              ))}
+              <input 
+                type="text" 
+                placeholder="Add tag (press Enter)"
+                value={tagInput}
+                onChange={e => setTagInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && tagInput.trim()) {
+                    e.preventDefault();
+                    if (!tags.includes(tagInput.trim())) setTags([...tags, tagInput.trim()]);
+                    setTagInput("");
+                  }
+                }}
+                className="text-xs font-sans px-4 py-1.5 bg-warm-white rounded-full border border-silver-sage/30 text-forest placeholder:text-sage/60 outline-none focus:border-terracotta transition-colors shadow-sm min-w-[150px]"
+              />
+            </div>
+            
+            <div className="space-y-2 pt-4 border-t border-silver-sage/20">
+              <span className="text-xs font-sans text-sage">How are you feeling right now?</span>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { label: "Calm", icon: "🌿", value: "emotion:calm" },
+                  { label: "Uncertain", icon: "🌫", value: "emotion:uncertain" },
+                  { label: "Sad", icon: "🌧", value: "emotion:sad" },
+                  { label: "Afraid", icon: "🌑", value: "emotion:afraid" },
+                  { label: "Resolved", icon: "☀", value: "emotion:resolved" }
+                ].map(emotion => (
+                  <button
+                    key={emotion.value}
+                    onClick={() => setSelectedEmotion(selectedEmotion === emotion.value ? null : emotion.value)}
+                    className={cn(
+                      "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-sans transition-colors border shadow-sm outline-none",
+                      selectedEmotion === emotion.value ? "bg-terracotta text-warm-white border-terracotta" : "bg-warm-white text-forest border-silver-sage/30 hover:border-terracotta/50"
+                    )}
+                  >
+                    <span>{emotion.icon}</span>
+                    <span>{emotion.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
