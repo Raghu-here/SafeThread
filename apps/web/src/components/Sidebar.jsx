@@ -1,10 +1,10 @@
-import { LayoutDashboard, Clock, Settings, LogOut, ShieldCheck, Menu, X, HeartHandshake } from "lucide-react";
+import { LayoutDashboard, Clock, Settings, LogOut, ShieldCheck, Menu, X, HeartHandshake, Moon, Sun } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useSidebarStore } from "@/store/useSidebarStore";
 import api from "@/api/axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const NavLink = ({ to, icon: Icon, label, onClick }) => {
   const location = useLocation();
@@ -30,6 +30,16 @@ export const Sidebar = () => {
   const { isOpen, setIsOpen } = useSidebarStore();
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [theme, setTheme] = useState(localStorage.getItem("safethread_theme") || "light");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("safethread_theme", theme);
+  }, [theme]);
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
@@ -93,6 +103,12 @@ export const Sidebar = () => {
               <p className="text-[10px] font-mono text-sage/60 truncate">{user.email}</p>
             </div>
           )}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="flex items-center gap-3 px-6 py-3 text-sage hover:text-terracotta transition-colors font-sans text-sm w-full rounded-full hover:bg-terracotta/5">
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+            <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
+          </button>
           <button
             onClick={handleSignOut}
             className="flex items-center gap-3 px-6 py-3 text-sage hover:text-terracotta transition-colors font-sans text-sm w-full rounded-full hover:bg-terracotta/5">

@@ -12,6 +12,15 @@
     --forest: #6B705C;
   }
 
+  html.dark {
+    --warm-white: #1a1714;
+    --blush: #2a2320;
+    --terracotta: #d4886a;
+    --silver-sage: #3a3530;
+    --sage: #a89e95;
+    --forest: #e8ddd5;
+  }
+
   body::before {
     content: "";
     position: fixed;

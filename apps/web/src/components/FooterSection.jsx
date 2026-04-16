@@ -44,7 +44,7 @@ export const FooterSection = () => {
                   </a>
                 </Space>
                 <Text style={{ color: palette.darkOlive, opacity: 0.8, display: 'block', marginTop: '16px' }}>
-                  © 2026 SafeThread. All rights reserved.
+                  © {new Date().getFullYear()} SafeThread. All rights reserved.
                 </Text>
               </Space>
             </Col>
