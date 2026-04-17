@@ -66,7 +66,7 @@ Current version: **0.0.0** (development)
 ---
 ## Architecture  
 
-```
+plaintext
 SafeThread/
 ├─ apps/
 │  ├─ api/                # Express REST API
@@ -82,7 +82,7 @@ SafeThread/
 │  └─ tailwind-config/   # Central Tailwind configuration
 ├─ docker-compose.yml
 └─ root package.json      # Workspace definition
-```
+
 
 - **API** (`apps/api`) exposes `/api/auth`, `/api/memories`, `/api/timeline`, `/api/storage`.  
 - **Prisma** handles DB migrations (`prisma:migrate`) and generates the client (`prisma:generate`).  
@@ -120,10 +120,23 @@ npm install   # installs root + all packages (api, web, shared)
 
 #### 3. Set up environment variables
 
+Copy the example files and edit them with your configuration:
+
 bash
+cp apps/api/.env.example apps/api/.env
+# edit apps/api/.env as needed
 
 
----
+### Running locally
+
+bash
+docker-compose up --build
+
+
+The API will be available at `http://localhost:3000/api` and the web client at `http://localhost:5173`.
+
+---  
+
 # API
 cp apps/api/.env.example apps/api/.env
 # Edit the file and provide real values (see the table below)
