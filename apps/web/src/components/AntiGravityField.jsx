@@ -38,7 +38,10 @@ const styles = {
   },
   innerContainer: {
     position: 'absolute',
-    inset: 0,
+    top: '160px',
+    left: 0,
+    right: 0,
+    bottom: 0,
     overflow: 'visible',
     pointerEvents: 'none',
   },
@@ -250,17 +253,25 @@ export default function AntiGravityField() {
       </div>
       
       <div style={styles.innerContainer}>
-        {displayFragments.map((card) => (
-          <FragmentCard
-            key={card.id}
-            card={card}
-            scrollYProgress={scrollYProgress}
-            mouseX={mouseX}
-            mouseY={mouseY}
-            isMobile={isMobile}
-            isHoverable={isHoverable}
-          />
-        ))}
+        {displayFragments.map((card, index) => {
+          const responsiveCard = isMobile ? {
+            ...card,
+            top: index * 20 + 2, // Spaced vertically down: 2%, 22%, 42%, 62%, 82% 
+            left: index % 2 === 0 ? 5 : 45 // Alternating L/R to avoid horizontal mobile squishing
+          } : card;
+          
+          return (
+            <FragmentCard
+              key={card.id}
+              card={responsiveCard}
+              scrollYProgress={scrollYProgress}
+              mouseX={mouseX}
+              mouseY={mouseY}
+              isMobile={isMobile}
+              isHoverable={isHoverable}
+            />
+          );
+        })}
       </div>
     </section>
   );
