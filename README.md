@@ -43,6 +43,7 @@ Current version: **0.0.0** (development)
 | **Search & Filtering** | Filter by memory type and search through content for quick retrieval | ✅ Stable |
 | **Loading States** | Polished skeleton screens for data fetching and transitions | ✅ Stable |
 | **Responsive UI** | Mobile-first sidebar with Zustand state and support resource links | ✅ Stable |
+| **Anti-Gravity UI** | Scroll-driven parallax field with floating cards, depth layering, and cursor-reactive motion | ✅ Stable |
 | **Docker & Docker‑Compose** | One‑command dev and production environments | ✅ Stable |
 | **Tailwind‑CSS UI** | Responsive, trauma-informed front-end built with Vite | ✅ Stable |
 
