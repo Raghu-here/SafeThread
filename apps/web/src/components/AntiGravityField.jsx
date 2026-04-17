@@ -238,30 +238,6 @@ export default function AntiGravityField() {
 
   const displayFragments = isMobile ? FRAGMENTS.slice(0, 5) : FRAGMENTS;
 
-  // Algorithm to trace a smooth S-curve timeline through the chronologically/vertically ordered nodes
-  const generateSmoothPath = (fragments) => {
-    const sorted = [...fragments].sort((a, b) => a.top - b.top);
-    if (sorted.length === 0) return "";
-    
-    // Offset by roughly half the card width/height to hit the aesthetic center
-    let path = `M ${sorted[0].left + 10} ${sorted[0].top + 4}`;
-    
-    for (let i = 1; i < sorted.length; i++) {
-      const prev = sorted[i - 1];
-      const curr = sorted[i];
-      
-      const px = prev.left + 10;
-      const py = prev.top + 4;
-      const cx = curr.left + 10;
-      const cy = curr.top + 4;
-      
-      const midY = py + (cy - py) / 2;
-      
-      path += ` C ${px} ${midY}, ${cx} ${midY}, ${cx} ${cy}`;
-    }
-    return path;
-  };
-
   return (
     <section 
       ref={containerRef} 
@@ -274,24 +250,6 @@ export default function AntiGravityField() {
       </div>
       
       <div style={styles.innerContainer}>
-        <svg 
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
-          viewBox="0 0 100 100" 
-          preserveAspectRatio="none"
-        >
-          <motion.path
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.3 }}
-            transition={{ duration: 4, ease: "easeInOut" }}
-            d={generateSmoothPath(displayFragments)}
-            fill="none"
-            stroke="#cb997e"
-            strokeWidth="1.5"
-            strokeDasharray="4 4"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
-
         {displayFragments.map((card) => (
           <FragmentCard
             key={card.id}
