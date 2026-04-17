@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "@/components/Button";
 import { UniquePointsSection } from "../components/UniquePointsSection";
 import { FooterSection } from "../components/FooterSection";
+import AntiGravityField from "../components/AntiGravityField";
 
 const FeatureCard = ({ icon: Icon, title, description }) =>
   <motion.div
@@ -97,6 +98,9 @@ export const LandingPage = () => {
           </svg>
         </div>
       </section>
+
+      {/* Anti-Gravity Field Section */}
+      <AntiGravityField />
 
       {/* Trust Section */}
       <section className="py-24 px-4 sm:px-6 bg-blush/10 border-y border-silver-sage/20">
