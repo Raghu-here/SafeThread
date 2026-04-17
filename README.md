@@ -15,19 +15,19 @@
 
 ---  
 
-## Overview  
+## Overview 🧵
 
-SafeThread is a full‑stack application that lets users create, store, and retrieve *memories* (text, images, PDFs, etc.) in private, encrypted threads.  
-- **Privacy‑first** – JWT‑based authentication, bcrypt‑hashed passwords, and optional AWS S3 storage.  
-- **Rich media support** – Upload images, PDFs, or any binary file up to 50 MB.  
-- **Searchable timeline** – Chronologically ordered view of a user’s memories.  
+SafeThread is a secure, full-stack platform designed to preserve delicate memories as immutable records. It provides a dignified space to document truths at your own pace, automatically weaving fragmented memories into a coherent, chronological timeline.
 
-Targeted at developers building personal knowledge bases, journaling apps, or any service that needs secure, searchable content storage.
+- **Immutable Records** – Memories are cryptographically hashed upon saving, ensuring a verifiable chain of custody and preventing alterations for legal admissibility.
+- **Chronological Unity** – Log fragments in any order; the system automatically assembles them into a structured, dated timeline.
+- **Privacy-First** – JWT-based authentication, bcrypt-hashed passwords, and encrypted storage (including optional AWS S3 support).
+- **Multi-Modal Support** – Capture memories via text, images, PDFs (up to 50MB), or voice-to-text and audio recordings.
+- **Advocacy Ready** – Generate secure chronological documents to share your story with counselors or advocates when you're ready.
 
 Current version: **0.0.0** (development)
 
----  
-
+---
 ## 🛠️ Features  
 
 | Feature | Description | Status |
