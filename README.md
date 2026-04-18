@@ -139,7 +139,25 @@ The API will be available at `http://localhost:3000/api` and the web client at `
 ---  
 
 # API
+
+Copy the example environment file and configure it:
+
+bash
 cp apps/api/.env.example apps/api/.env
+
+
+The API now includes the following resources backed by Prisma models:
+
+- **User** – registration, login, email verification, and password management.
+- **RefreshToken** – endpoint to rotate and revoke refresh tokens.
+- **MemoryCard** – create, read, update, delete memory cards; supports text, audio, timestamps, confidence levels, and cryptographic hash generation.
+- **Tag** – CRUD operations for tags that can be attached to memory cards.
+- **MemoryCardTag** – associate tags with memory cards.
+- **MemoryAttachment** – upload and retrieve audio/video/image attachments with optional AI‑generated transcripts.
+- **Timeline** – create a personal timeline for each user.
+- **TimelineEntry** – link memory cards to a timeline, enabling chronological reconstruction.
+
+All endpoints follow REST conventions under `/api/v1/`. See the automatically generated OpenAPI spec at `/api/docs` for full request/response schemas.
 # Edit the file and provide real values (see the table below)
 ```
 
@@ -187,28 +205,35 @@ curl -s http://localhost:3000/health | jq
 
 ### 1. Authentication, Grounding & Onboarding
 
-Access your secure vault by signing up or logging in. Upon entry, SafeThread presents a **Grounding Modal**—a brief breathing exercise designed to help you center yourself. New users are also presented with a multi-step **Onboarding Tour** that introduces the platform's core pillars: immutable records with cryptographic hashes, chronological timeline assembly, and legal-grade document exports.
+Access your secure vault by signing up or logging in. Upon entry, SafeThread presents a **Grounding Modal**—a brief breathing exercise designed to help you center yourself. New users are also presented with a multi-step **Onboarding Tour** that introduces the platform's core pillars: immutable records with cryptographic hashes, chronological timeline assembly, and legal‑grade document exports.
 
 ### 2. Capturing Memories
 
 Use the **Dashboard** to record thoughts as they occur.
 - **Text Entries**: Type directly into the input panel to save written memories.
-- **Voice-to-Text**: Use the microphone icon to transcribe your speech into text in real-time using browser-native recognition.
+- **Voice‑to‑Text**: Use the microphone icon to transcribe your speech into text in real‑time using browser‑native recognition.
 - **Audio Recording**: Record raw audio clips that are automatically transcribed using AI and cryptographically sealed.
 - **Contextual Metadata**: Add specific dates, times, confidence levels, and emotional tags to provide depth to your records.
+- **Attachments**: Upload images, video, or additional audio files. Attachments are stored as `MemoryAttachment` records and, when possible, receive AI‑generated transcripts.
+- **Tags**: Assign descriptive tags to each memory card for powerful filtering and semantic grouping.
 
-### 3. Navigating the Timeline
+### 3. Organizing with Tags & Attachments
+
+- **Tags** let you categorize memories (e.g., #family, #work, #therapy). You can filter the dashboard or timeline view by one or multiple tags.
+- **Attachments** are displayed alongside the corresponding memory entry, with playback controls for audio/video and preview thumbnails for images.
+
+### 4. Navigating the Timeline
 
 The **Timeline** page reconstructs your story chronologically:
 - **Monthly Grouping**: Entries are organized into collapsible monthly sections for better organization and readability.
-- **Search & Filter**: Use the search bar to find specific keywords or filter the view to show written, audio, or undated memories.
-- **Audio Playback**: Listen to your recorded memories and review AI-generated transcripts.
+- **Search & Filter**: Use the search bar to find specific keywords or filter the view to show written, audio, or undated memories, as well as filter by tags.
+- **Audio Playback**: Listen to your recorded memories and review AI‑generated transcripts.
 - **Integrity Hashes**: Each entry displays a unique hash to verify that the record has not been altered.
 - **Legal Ledger Export**: Generate a formal **Chronological Memory Ledger** as a PDF. This document includes entry numbers, timestamps, transcripts, and cryptographic hashes, formatted for use as a verifiable record.
 
-### 4. Support Resources
+### 5. Support Resources
 
-SafeThread is designed with a trauma-informed approach. The sidebar provides immediate access to the **RAINN** support network and the **988** crisis line for users in need of assistance.
+SafeThread is designed with a trauma‑informed approach. The sidebar provides immediate access to the **RAINN** support network and the **988** crisis line for users in need of assistance.
 # Example: obtain JWT tokens
 curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
