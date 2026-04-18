@@ -13,6 +13,7 @@ export const MemoryInputPanel = ({ onSaved }) => {
   const [saveStatus, setSaveStatus] = useState(null); // 'ok' | 'err'
 
   // Date/time/confidence
+  const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [confidence, setConfidence] = useState("APPROXIMATE");
 
