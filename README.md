@@ -138,7 +138,7 @@ The API will be available at `http://localhost:3000/api` and the web client at `
 
 ---  
 
-# API
+# API 🔌
 
 Copy the example environment file and configure it:
 
@@ -150,7 +150,7 @@ The API now includes the following resources backed by Prisma models:
 
 - **User** – registration, login, email verification, and password management.
 - **RefreshToken** – endpoint to rotate and revoke refresh tokens.
-- **MemoryCard** – create, read, update, delete memory cards; supports text, audio, timestamps, confidence levels, and cryptographic hash generation.
+- **MemoryCard** – create, read, update, delete memory cards; supports text, audio, transcripts, timestamps, confidence levels, and cryptographic hash generation.
 - **Tag** – CRUD operations for tags that can be attached to memory cards.
 - **MemoryCardTag** – associate tags with memory cards.
 - **MemoryAttachment** – upload and retrieve audio/video/image attachments with optional AI‑generated transcripts.
@@ -364,7 +364,7 @@ The compose file defines three services:
 
 ---  
 
-## API Documentation  
+## API Documentation 📜
 
 | Method | Endpoint | Auth | Description |
 |--------|----------|------|-------------|
@@ -382,7 +382,7 @@ The compose file defines three services:
 
 **Error format**
 
-```json
+
 {
   "error": {
     "code": "VALIDATION_ERROR",
@@ -390,12 +390,11 @@ The compose file defines three services:
     "details": [...]
   }
 }
-```
+
 
 **Rate limits** – 100 requests per minute per IP (configurable in `src/middleware/rateLimiter.js`).  
 
----  
-
+---
 ## Contributing  
 
 1. **Fork** the repository and clone your fork.  
