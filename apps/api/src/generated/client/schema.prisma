@@ -4,8 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -22,7 +23,7 @@ model User {
 
 model RefreshToken {
   id        String   @id @default(uuid())
-  token     String   @unique
+  token     String   @unique @db.Text
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   expiresAt DateTime
@@ -33,7 +34,7 @@ model MemoryCard {
   id             String             @id @default(uuid())
   userId         String
   user           User               @relation(fields: [userId], references: [id])
-  content        String
+  content        String             @db.Text
   eventDate      DateTime?
   eventTime      String?
   dateConfidence String
@@ -43,8 +44,7 @@ model MemoryCard {
   supersedes     MemoryCard?        @relation("Corrections", fields: [supersedesId], references: [id])
   supersededBy   MemoryCard?        @relation("Corrections")
   hash           String
-  audioData      String?
-  transcript     String?
+  audioData      String?            @db.Text
   tags           MemoryCardTag[]
   attachments    MemoryAttachment[]
   timelineEntry  TimelineEntry?
@@ -70,9 +70,9 @@ model MemoryAttachment {
   id           String     @id @default(uuid())
   memoryCardId String
   memoryCard   MemoryCard @relation(fields: [memoryCardId], references: [id])
-  type         String // e.g., "audio/wav"
+  type         String
   url          String
-  transcript   String?
+  transcript   String?    @db.Text
   createdAt    DateTime   @default(now())
 }
 
@@ -97,5 +97,5 @@ model AuditLog {
   action    String
   entityId  String
   timestamp DateTime @default(now())
-  metadata  String?
+  metadata  String?  @db.Text
 }

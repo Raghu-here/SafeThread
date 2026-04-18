@@ -2505,6 +2505,7 @@ export namespace Prisma {
      * The data used to create many Users.
      */
     data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -2519,6 +2520,7 @@ export namespace Prisma {
      * The data used to create many Users.
      */
     data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -3472,6 +3474,7 @@ export namespace Prisma {
      * The data used to create many RefreshTokens.
      */
     data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -3486,6 +3489,7 @@ export namespace Prisma {
      * The data used to create many RefreshTokens.
      */
     data: RefreshTokenCreateManyInput | RefreshTokenCreateManyInput[]
+    skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -3619,7 +3623,6 @@ export namespace Prisma {
     supersedesId: string | null
     hash: string | null
     audioData: string | null
-    transcript: string | null
   }
 
   export type MemoryCardMaxAggregateOutputType = {
@@ -3634,7 +3637,6 @@ export namespace Prisma {
     supersedesId: string | null
     hash: string | null
     audioData: string | null
-    transcript: string | null
   }
 
   export type MemoryCardCountAggregateOutputType = {
@@ -3649,7 +3651,6 @@ export namespace Prisma {
     supersedesId: number
     hash: number
     audioData: number
-    transcript: number
     _all: number
   }
 
@@ -3666,7 +3667,6 @@ export namespace Prisma {
     supersedesId?: true
     hash?: true
     audioData?: true
-    transcript?: true
   }
 
   export type MemoryCardMaxAggregateInputType = {
@@ -3681,7 +3681,6 @@ export namespace Prisma {
     supersedesId?: true
     hash?: true
     audioData?: true
-    transcript?: true
   }
 
   export type MemoryCardCountAggregateInputType = {
@@ -3696,7 +3695,6 @@ export namespace Prisma {
     supersedesId?: true
     hash?: true
     audioData?: true
-    transcript?: true
     _all?: true
   }
 
@@ -3784,7 +3782,6 @@ export namespace Prisma {
     supersedesId: string | null
     hash: string
     audioData: string | null
-    transcript: string | null
     _count: MemoryCardCountAggregateOutputType | null
     _min: MemoryCardMinAggregateOutputType | null
     _max: MemoryCardMaxAggregateOutputType | null
@@ -3816,7 +3813,6 @@ export namespace Prisma {
     supersedesId?: boolean
     hash?: boolean
     audioData?: boolean
-    transcript?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     supersedes?: boolean | MemoryCard$supersedesArgs<ExtArgs>
     supersededBy?: boolean | MemoryCard$supersededByArgs<ExtArgs>
@@ -3838,7 +3834,6 @@ export namespace Prisma {
     supersedesId?: boolean
     hash?: boolean
     audioData?: boolean
-    transcript?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     supersedes?: boolean | MemoryCard$supersedesArgs<ExtArgs>
   }, ExtArgs["result"]["memoryCard"]>
@@ -3855,7 +3850,6 @@ export namespace Prisma {
     supersedesId?: boolean
     hash?: boolean
     audioData?: boolean
-    transcript?: boolean
   }
 
   export type MemoryCardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3894,7 +3888,6 @@ export namespace Prisma {
       supersedesId: string | null
       hash: string
       audioData: string | null
-      transcript: string | null
     }, ExtArgs["result"]["memoryCard"]>
     composites: {}
   }
@@ -4305,7 +4298,6 @@ export namespace Prisma {
     readonly supersedesId: FieldRef<"MemoryCard", 'String'>
     readonly hash: FieldRef<"MemoryCard", 'String'>
     readonly audioData: FieldRef<"MemoryCard", 'String'>
-    readonly transcript: FieldRef<"MemoryCard", 'String'>
   }
     
 
@@ -4511,6 +4503,7 @@ export namespace Prisma {
      * The data used to create many MemoryCards.
      */
     data: MemoryCardCreateManyInput | MemoryCardCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -4525,6 +4518,7 @@ export namespace Prisma {
      * The data used to create many MemoryCards.
      */
     data: MemoryCardCreateManyInput | MemoryCardCreateManyInput[]
+    skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -5502,6 +5496,7 @@ export namespace Prisma {
      * The data used to create many Tags.
      */
     data: TagCreateManyInput | TagCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -5516,6 +5511,7 @@ export namespace Prisma {
      * The data used to create many Tags.
      */
     data: TagCreateManyInput | TagCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -6419,6 +6415,7 @@ export namespace Prisma {
      * The data used to create many MemoryCardTags.
      */
     data: MemoryCardTagCreateManyInput | MemoryCardTagCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -6433,6 +6430,7 @@ export namespace Prisma {
      * The data used to create many MemoryCardTags.
      */
     data: MemoryCardTagCreateManyInput | MemoryCardTagCreateManyInput[]
+    skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -7362,6 +7360,7 @@ export namespace Prisma {
      * The data used to create many MemoryAttachments.
      */
     data: MemoryAttachmentCreateManyInput | MemoryAttachmentCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -7376,6 +7375,7 @@ export namespace Prisma {
      * The data used to create many MemoryAttachments.
      */
     data: MemoryAttachmentCreateManyInput | MemoryAttachmentCreateManyInput[]
+    skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -8256,6 +8256,7 @@ export namespace Prisma {
      * The data used to create many Timelines.
      */
     data: TimelineCreateManyInput | TimelineCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -8270,6 +8271,7 @@ export namespace Prisma {
      * The data used to create many Timelines.
      */
     data: TimelineCreateManyInput | TimelineCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -9231,6 +9233,7 @@ export namespace Prisma {
      * The data used to create many TimelineEntries.
      */
     data: TimelineEntryCreateManyInput | TimelineEntryCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -9245,6 +9248,7 @@ export namespace Prisma {
      * The data used to create many TimelineEntries.
      */
     data: TimelineEntryCreateManyInput | TimelineEntryCreateManyInput[]
+    skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
@@ -10139,6 +10143,7 @@ export namespace Prisma {
      * The data used to create many AuditLogs.
      */
     data: AuditLogCreateManyInput | AuditLogCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -10153,6 +10158,7 @@ export namespace Prisma {
      * The data used to create many AuditLogs.
      */
     data: AuditLogCreateManyInput | AuditLogCreateManyInput[]
+    skipDuplicates?: boolean
   }
 
   /**
@@ -10249,6 +10255,9 @@ export namespace Prisma {
    */
 
   export const TransactionIsolationLevel: {
+    ReadUncommitted: 'ReadUncommitted',
+    ReadCommitted: 'ReadCommitted',
+    RepeatableRead: 'RepeatableRead',
     Serializable: 'Serializable'
   };
 
@@ -10290,8 +10299,7 @@ export namespace Prisma {
     isSuperseded: 'isSuperseded',
     supersedesId: 'supersedesId',
     hash: 'hash',
-    audioData: 'audioData',
-    transcript: 'transcript'
+    audioData: 'audioData'
   };
 
   export type MemoryCardScalarFieldEnum = (typeof MemoryCardScalarFieldEnum)[keyof typeof MemoryCardScalarFieldEnum]
@@ -10364,6 +10372,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
   export const NullsOrder: {
     first: 'first',
     last: 'last'
@@ -10385,6 +10401,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -10399,6 +10422,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -10406,9 +10436,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -10553,7 +10597,6 @@ export namespace Prisma {
     supersedesId?: StringNullableFilter<"MemoryCard"> | string | null
     hash?: StringFilter<"MemoryCard"> | string
     audioData?: StringNullableFilter<"MemoryCard"> | string | null
-    transcript?: StringNullableFilter<"MemoryCard"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     supersedes?: XOR<MemoryCardNullableRelationFilter, MemoryCardWhereInput> | null
     supersededBy?: XOR<MemoryCardNullableRelationFilter, MemoryCardWhereInput> | null
@@ -10574,7 +10617,6 @@ export namespace Prisma {
     supersedesId?: SortOrderInput | SortOrder
     hash?: SortOrder
     audioData?: SortOrderInput | SortOrder
-    transcript?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     supersedes?: MemoryCardOrderByWithRelationInput
     supersededBy?: MemoryCardOrderByWithRelationInput
@@ -10598,7 +10640,6 @@ export namespace Prisma {
     isSuperseded?: BoolFilter<"MemoryCard"> | boolean
     hash?: StringFilter<"MemoryCard"> | string
     audioData?: StringNullableFilter<"MemoryCard"> | string | null
-    transcript?: StringNullableFilter<"MemoryCard"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     supersedes?: XOR<MemoryCardNullableRelationFilter, MemoryCardWhereInput> | null
     supersededBy?: XOR<MemoryCardNullableRelationFilter, MemoryCardWhereInput> | null
@@ -10619,7 +10660,6 @@ export namespace Prisma {
     supersedesId?: SortOrderInput | SortOrder
     hash?: SortOrder
     audioData?: SortOrderInput | SortOrder
-    transcript?: SortOrderInput | SortOrder
     _count?: MemoryCardCountOrderByAggregateInput
     _max?: MemoryCardMaxOrderByAggregateInput
     _min?: MemoryCardMinOrderByAggregateInput
@@ -10640,7 +10680,6 @@ export namespace Prisma {
     supersedesId?: StringNullableWithAggregatesFilter<"MemoryCard"> | string | null
     hash?: StringWithAggregatesFilter<"MemoryCard"> | string
     audioData?: StringNullableWithAggregatesFilter<"MemoryCard"> | string | null
-    transcript?: StringNullableWithAggregatesFilter<"MemoryCard"> | string | null
   }
 
   export type TagWhereInput = {
@@ -11087,7 +11126,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     hash: string
     audioData?: string | null
-    transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
     supersededBy?: MemoryCardCreateNestedOneWithoutSupersedesInput
@@ -11108,7 +11146,6 @@ export namespace Prisma {
     supersedesId?: string | null
     hash: string
     audioData?: string | null
-    transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
     attachments?: MemoryAttachmentUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -11125,7 +11162,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
     supersededBy?: MemoryCardUpdateOneWithoutSupersedesNestedInput
@@ -11146,7 +11182,6 @@ export namespace Prisma {
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
     attachments?: MemoryAttachmentUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -11165,7 +11200,6 @@ export namespace Prisma {
     supersedesId?: string | null
     hash: string
     audioData?: string | null
-    transcript?: string | null
   }
 
   export type MemoryCardUpdateManyMutationInput = {
@@ -11178,7 +11212,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MemoryCardUncheckedUpdateManyInput = {
@@ -11193,7 +11226,6 @@ export namespace Prisma {
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TagCreateInput = {
@@ -11489,8 +11521,8 @@ export namespace Prisma {
 
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -11498,13 +11530,14 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -11512,6 +11545,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
@@ -11522,8 +11556,8 @@ export namespace Prisma {
 
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -11588,8 +11622,8 @@ export namespace Prisma {
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -11597,6 +11631,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -11605,8 +11640,8 @@ export namespace Prisma {
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -11614,6 +11649,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -11630,8 +11666,8 @@ export namespace Prisma {
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -11673,8 +11709,8 @@ export namespace Prisma {
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -11724,7 +11760,6 @@ export namespace Prisma {
     supersedesId?: SortOrder
     hash?: SortOrder
     audioData?: SortOrder
-    transcript?: SortOrder
   }
 
   export type MemoryCardMaxOrderByAggregateInput = {
@@ -11739,7 +11774,6 @@ export namespace Prisma {
     supersedesId?: SortOrder
     hash?: SortOrder
     audioData?: SortOrder
-    transcript?: SortOrder
   }
 
   export type MemoryCardMinOrderByAggregateInput = {
@@ -11754,13 +11788,12 @@ export namespace Prisma {
     supersedesId?: SortOrder
     hash?: SortOrder
     audioData?: SortOrder
-    transcript?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -11873,8 +11906,8 @@ export namespace Prisma {
 
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -11918,8 +11951,8 @@ export namespace Prisma {
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -12419,8 +12452,8 @@ export namespace Prisma {
 
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -12433,8 +12466,8 @@ export namespace Prisma {
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -12452,8 +12485,8 @@ export namespace Prisma {
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -12463,8 +12496,8 @@ export namespace Prisma {
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -12480,8 +12513,8 @@ export namespace Prisma {
 
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -12491,8 +12524,8 @@ export namespace Prisma {
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -12508,8 +12541,8 @@ export namespace Prisma {
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -12527,8 +12560,8 @@ export namespace Prisma {
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -12541,8 +12574,8 @@ export namespace Prisma {
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -12552,8 +12585,8 @@ export namespace Prisma {
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -12566,8 +12599,8 @@ export namespace Prisma {
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -12582,8 +12615,8 @@ export namespace Prisma {
 
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -12601,7 +12634,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     hash: string
     audioData?: string | null
-    transcript?: string | null
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
     supersededBy?: MemoryCardCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagCreateNestedManyWithoutMemoryCardInput
@@ -12620,7 +12652,6 @@ export namespace Prisma {
     supersedesId?: string | null
     hash: string
     audioData?: string | null
-    transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
     attachments?: MemoryAttachmentUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -12634,6 +12665,7 @@ export namespace Prisma {
 
   export type MemoryCardCreateManyUserInputEnvelope = {
     data: MemoryCardCreateManyUserInput | MemoryCardCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type RefreshTokenCreateWithoutUserInput = {
@@ -12657,6 +12689,7 @@ export namespace Prisma {
 
   export type RefreshTokenCreateManyUserInputEnvelope = {
     data: RefreshTokenCreateManyUserInput | RefreshTokenCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type MemoryCardUpsertWithWhereUniqueWithoutUserInput = {
@@ -12690,7 +12723,6 @@ export namespace Prisma {
     supersedesId?: StringNullableFilter<"MemoryCard"> | string | null
     hash?: StringFilter<"MemoryCard"> | string
     audioData?: StringNullableFilter<"MemoryCard"> | string | null
-    transcript?: StringNullableFilter<"MemoryCard"> | string | null
   }
 
   export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
@@ -12817,7 +12849,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     hash: string
     audioData?: string | null
-    transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
     tags?: MemoryCardTagCreateNestedManyWithoutMemoryCardInput
@@ -12837,7 +12868,6 @@ export namespace Prisma {
     supersedesId?: string | null
     hash: string
     audioData?: string | null
-    transcript?: string | null
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
     attachments?: MemoryAttachmentUncheckedCreateNestedManyWithoutMemoryCardInput
     timelineEntry?: TimelineEntryUncheckedCreateNestedOneWithoutMemoryCardInput
@@ -12858,7 +12888,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     hash: string
     audioData?: string | null
-    transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersededBy?: MemoryCardCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagCreateNestedManyWithoutMemoryCardInput
@@ -12877,7 +12906,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     hash: string
     audioData?: string | null
-    transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
     attachments?: MemoryAttachmentUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -12904,6 +12932,7 @@ export namespace Prisma {
 
   export type MemoryCardTagCreateManyMemoryCardInputEnvelope = {
     data: MemoryCardTagCreateManyMemoryCardInput | MemoryCardTagCreateManyMemoryCardInput[]
+    skipDuplicates?: boolean
   }
 
   export type MemoryAttachmentCreateWithoutMemoryCardInput = {
@@ -12929,6 +12958,7 @@ export namespace Prisma {
 
   export type MemoryAttachmentCreateManyMemoryCardInputEnvelope = {
     data: MemoryAttachmentCreateManyMemoryCardInput | MemoryAttachmentCreateManyMemoryCardInput[]
+    skipDuplicates?: boolean
   }
 
   export type TimelineEntryCreateWithoutMemoryCardInput = {
@@ -13002,7 +13032,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
     tags?: MemoryCardTagUpdateManyWithoutMemoryCardNestedInput
@@ -13022,7 +13051,6 @@ export namespace Prisma {
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
     attachments?: MemoryAttachmentUncheckedUpdateManyWithoutMemoryCardNestedInput
     timelineEntry?: TimelineEntryUncheckedUpdateOneWithoutMemoryCardNestedInput
@@ -13049,7 +13077,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersededBy?: MemoryCardUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUpdateManyWithoutMemoryCardNestedInput
@@ -13068,7 +13095,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
     attachments?: MemoryAttachmentUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13165,6 +13191,7 @@ export namespace Prisma {
 
   export type MemoryCardTagCreateManyTagInputEnvelope = {
     data: MemoryCardTagCreateManyTagInput | MemoryCardTagCreateManyTagInput[]
+    skipDuplicates?: boolean
   }
 
   export type MemoryCardTagUpsertWithWhereUniqueWithoutTagInput = {
@@ -13193,7 +13220,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     hash: string
     audioData?: string | null
-    transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
     supersededBy?: MemoryCardCreateNestedOneWithoutSupersedesInput
@@ -13213,7 +13239,6 @@ export namespace Prisma {
     supersedesId?: string | null
     hash: string
     audioData?: string | null
-    transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     attachments?: MemoryAttachmentUncheckedCreateNestedManyWithoutMemoryCardInput
     timelineEntry?: TimelineEntryUncheckedCreateNestedOneWithoutMemoryCardInput
@@ -13262,7 +13287,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
     supersededBy?: MemoryCardUpdateOneWithoutSupersedesNestedInput
@@ -13282,7 +13306,6 @@ export namespace Prisma {
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     attachments?: MemoryAttachmentUncheckedUpdateManyWithoutMemoryCardNestedInput
     timelineEntry?: TimelineEntryUncheckedUpdateOneWithoutMemoryCardNestedInput
@@ -13321,7 +13344,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     hash: string
     audioData?: string | null
-    transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
     supersededBy?: MemoryCardCreateNestedOneWithoutSupersedesInput
@@ -13341,7 +13363,6 @@ export namespace Prisma {
     supersedesId?: string | null
     hash: string
     audioData?: string | null
-    transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
     timelineEntry?: TimelineEntryUncheckedCreateNestedOneWithoutMemoryCardInput
@@ -13373,7 +13394,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
     supersededBy?: MemoryCardUpdateOneWithoutSupersedesNestedInput
@@ -13393,7 +13413,6 @@ export namespace Prisma {
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
     timelineEntry?: TimelineEntryUncheckedUpdateOneWithoutMemoryCardNestedInput
@@ -13418,6 +13437,7 @@ export namespace Prisma {
 
   export type TimelineEntryCreateManyTimelineInputEnvelope = {
     data: TimelineEntryCreateManyTimelineInput | TimelineEntryCreateManyTimelineInput[]
+    skipDuplicates?: boolean
   }
 
   export type TimelineEntryUpsertWithWhereUniqueWithoutTimelineInput = {
@@ -13471,7 +13491,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     hash: string
     audioData?: string | null
-    transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
     supersededBy?: MemoryCardCreateNestedOneWithoutSupersedesInput
@@ -13491,7 +13510,6 @@ export namespace Prisma {
     supersedesId?: string | null
     hash: string
     audioData?: string | null
-    transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
     attachments?: MemoryAttachmentUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -13544,7 +13562,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
     supersededBy?: MemoryCardUpdateOneWithoutSupersedesNestedInput
@@ -13564,7 +13581,6 @@ export namespace Prisma {
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
     attachments?: MemoryAttachmentUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13581,7 +13597,6 @@ export namespace Prisma {
     supersedesId?: string | null
     hash: string
     audioData?: string | null
-    transcript?: string | null
   }
 
   export type RefreshTokenCreateManyUserInput = {
@@ -13601,7 +13616,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
     supersededBy?: MemoryCardUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUpdateManyWithoutMemoryCardNestedInput
@@ -13620,7 +13634,6 @@ export namespace Prisma {
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
     attachments?: MemoryAttachmentUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13638,7 +13651,6 @@ export namespace Prisma {
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
     audioData?: NullableStringFieldUpdateOperationsInput | string | null
-    transcript?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RefreshTokenUpdateWithoutUserInput = {

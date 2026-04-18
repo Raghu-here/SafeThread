@@ -116,6 +116,9 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -148,8 +151,7 @@ exports.Prisma.MemoryCardScalarFieldEnum = {
   isSuperseded: 'isSuperseded',
   supersedesId: 'supersedesId',
   hash: 'hash',
-  audioData: 'audioData',
-  transcript: 'transcript'
+  audioData: 'audioData'
 };
 
 exports.Prisma.TagScalarFieldEnum = {
@@ -196,6 +198,11 @@ exports.Prisma.AuditLogScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
