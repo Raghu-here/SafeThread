@@ -60,6 +60,7 @@ Current version: **0.0.0** (development)
 | **PDF** | pdfkit, jspdf | Server‑side and client‑side PDF generation |
 | **Validation** | zod | Declarative schema validation |
 | **Front‑end** | Vite 5, React (via Vite template), Tailwind‑CSS | Fast dev server, utility‑first styling |
+| **HTTP client** | Axios | Promise‑based API calls with interceptors for auth |
 | **Containerisation** | Docker, Docker‑Compose | Consistent dev/prod environments |
 | **CI/CD** | GitHub Actions (build, test, lint) | Automated quality gates |
 | **Shared code** | `@safethread/shared` (workspace package) | Re‑usable types & utilities across apps |
@@ -145,6 +146,8 @@ Copy the example environment file and configure it:
 bash
 cp apps/api/.env.example apps/api/.env
 
+
+> **Note**: Set `VITE_API_URL` in the web app’s `.env` (or `.env.local`) to point to your API base URL (e.g., `http://localhost:3000`). The front‑end will automatically ensure the URL ends with `/api` if it is not already present.
 
 The API now includes the following resources backed by Prisma models:
 
