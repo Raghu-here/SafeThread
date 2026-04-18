@@ -45,6 +45,7 @@ model MemoryCard {
   supersededBy   MemoryCard?        @relation("Corrections")
   hash           String
   audioData      String?            @db.Text
+  transcript     String?            @db.Text
   tags           MemoryCardTag[]
   attachments    MemoryAttachment[]
   timelineEntry  TimelineEntry?
