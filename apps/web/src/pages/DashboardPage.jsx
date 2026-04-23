@@ -11,12 +11,18 @@ import api from "@/api/axios";
 export const DashboardPage = () => {
   const user = useAuthStore((s) => s.user);
   const [memories, setMemories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchMemories = () => {
+      setIsLoading(true);
       api.get("/memories")
-        .then((res) => setMemories(res.data || []))
-        .catch(() => setMemories([]));
+        .then((res) => {
+          const data = res.data?.data || res.data || [];
+          setMemories(Array.isArray(data) ? data : []);
+        })
+        .catch(() => setMemories([]))
+        .finally(() => setIsLoading(false));
     };
     fetchMemories();
     
@@ -60,7 +66,22 @@ export const DashboardPage = () => {
             </header>
             
             <div className="bg-blush/10 rounded-[2.5rem] p-6 border border-silver-sage/30 h-full min-h-[400px]">
-              {recentMemories.length === 0 ? (
+              {isLoading ? (
+                <div className="space-y-4 pt-4">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="bg-warm-white p-4 rounded-3xl border border-silver-sage/20 animate-pulse">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="h-3 w-20 bg-silver-sage/30 rounded-full" />
+                        <div className="h-3 w-12 bg-silver-sage/20 rounded-full" />
+                      </div>
+                      <div className="space-y-2">
+                        <div className="h-3 w-full bg-silver-sage/20 rounded-full" />
+                        <div className="h-3 w-3/4 bg-silver-sage/15 rounded-full" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : recentMemories.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4 pt-12">
                   <div className="w-16 h-16 bg-warm-white rounded-2xl flex items-center justify-center text-terracotta border border-silver-sage/50">
                     <Lock size={32} />

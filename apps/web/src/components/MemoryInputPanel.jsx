@@ -124,68 +124,39 @@ export const MemoryInputPanel = ({ onSaved }) => {
   const formatTime = (secs) =>
     `${String(Math.floor(secs / 60)).padStart(2, "0")}:${String(secs % 60).padStart(2, "0")}`;
 
-  // ── Save ────────────────────────────────────────────────────────────────
+  // ── Unified Save ───────────────────────────────────────────────────────
   const handleSave = async () => {
     let memoryContent = content.trim();
+    let base64 = null;
 
     if (mode === "audio") {
       if (!audioBlob) return;
-      // Encode audio as base64 data URL and send it to the API
-      const base64 = await new Promise((resolve) => {
+      base64 = await new Promise((resolve) => {
         const reader = new FileReader();
         reader.onloadend = () => resolve(reader.result);
         reader.readAsDataURL(audioBlob);
       });
       memoryContent = `[Audio Recording — ${formatTime(recordingSeconds)}]\n\nThis memory was captured as a voice recording. Duration: ${formatTime(recordingSeconds)}.`;
-
-      if (!memoryContent) return;
-      setIsSaving(true);
-      setSaveStatus(null);
-
-      try {
-        await api.post("/memories", {
-          content: memoryContent,
-          eventDate: date || undefined,
-          eventTime: time || undefined,
-          dateConfidence: confidence,
-          audioData: base64,          // ← stored in DB
-          tags: selectedEmotion ? [...tags, selectedEmotion] : tags,
-        });
-        setSaveStatus("ok");
-        setContent(""); setDate(""); setTime(""); setConfidence("APPROXIMATE");
-        setTags([]); setSelectedEmotion(null); setTagInput("");
-        setShowDetails(false);
-        discardRecording();
-        onSaved?.();
-        window.dispatchEvent(new Event("memorySaved"));
-        setTimeout(() => setSaveStatus(null), 3000);
-      } catch {
-        setSaveStatus("err");
-        setTimeout(() => setSaveStatus(null), 4000);
-      } finally { setIsSaving(false); }
-      return;            // early return — skip the rest of handleSave
     }
 
     if (!memoryContent) return;
     setIsSaving(true);
     setSaveStatus(null);
 
+    const payload = {
+      content: memoryContent,
+      eventDate: date || undefined,
+      eventTime: time || undefined,
+      dateConfidence: confidence,
+      tags: selectedEmotion ? [...tags, selectedEmotion] : tags,
+    };
+    if (mode === "audio") payload.audioData = base64;
+
     try {
-      await api.post("/memories", {
-        content: memoryContent,
-        eventDate: date || undefined,
-        eventTime: time || undefined,
-        dateConfidence: confidence,
-        tags: selectedEmotion ? [...tags, selectedEmotion] : tags,
-      });
+      await api.post("/memories", payload);
       setSaveStatus("ok");
-      setContent("");
-      setDate("");
-      setTime("");
-      setConfidence("APPROXIMATE");
-      setTags([]);
-      setSelectedEmotion(null);
-      setTagInput("");
+      setContent(""); setDate(""); setTime(""); setConfidence("APPROXIMATE");
+      setTags([]); setSelectedEmotion(null); setTagInput("");
       setShowDetails(false);
       discardRecording();
       onSaved?.();
@@ -203,6 +174,61 @@ export const MemoryInputPanel = ({ onSaved }) => {
   const isSaveDisabled =
     isSaving ||
     (mode === "audio" ? (!audioBlob || isRecording) : !content.trim());
+
+  // ── Tag & Emotion UI (shared across all modes) ─────────────────────────
+  const renderTagsAndEmotions = () => (
+    <div className="mt-6 space-y-5">
+      <div className="flex flex-wrap gap-2 items-center">
+        {tags.map(t => (
+          <span key={t} className="flex items-center gap-1 bg-terracotta/10 text-terracotta px-3 py-1 rounded-full text-xs font-sans border border-terracotta/20">
+            #{t}
+            <button onClick={() => setTags(tags.filter(x => x !== t))} className="hover:text-terracotta/70 ml-1 outline-none focus-visible:ring-2 focus-visible:ring-terracotta rounded">
+              <X size={12} />
+            </button>
+          </span>
+        ))}
+        <input 
+          type="text" 
+          placeholder="Add tag (press Enter)"
+          value={tagInput}
+          onChange={e => setTagInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && tagInput.trim()) {
+              e.preventDefault();
+              if (!tags.includes(tagInput.trim())) setTags([...tags, tagInput.trim()]);
+              setTagInput("");
+            }
+          }}
+          className="text-xs font-sans px-4 py-1.5 bg-warm-white rounded-full border border-silver-sage/30 text-forest placeholder:text-sage/60 outline-none focus:border-terracotta transition-colors shadow-sm min-w-[150px]"
+        />
+      </div>
+      
+      <div className="space-y-2 pt-4 border-t border-silver-sage/20">
+        <span className="text-xs font-sans text-sage">How are you feeling right now?</span>
+        <div className="flex flex-wrap gap-2">
+          {[
+            { label: "Calm", icon: "🌿", value: "emotion:calm" },
+            { label: "Uncertain", icon: "🌫", value: "emotion:uncertain" },
+            { label: "Sad", icon: "🌧", value: "emotion:sad" },
+            { label: "Afraid", icon: "🌑", value: "emotion:afraid" },
+            { label: "Resolved", icon: "☀", value: "emotion:resolved" }
+          ].map(emotion => (
+            <button
+              key={emotion.value}
+              onClick={() => setSelectedEmotion(selectedEmotion === emotion.value ? null : emotion.value)}
+              className={cn(
+                "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-sans transition-colors border shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-terracotta",
+                selectedEmotion === emotion.value ? "bg-terracotta text-warm-white border-terracotta" : "bg-warm-white text-forest border-silver-sage/30 hover:border-terracotta/50"
+              )}
+            >
+              <span>{emotion.icon}</span>
+              <span>{emotion.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 
   // ── Render ─────────────────────────────────────────────────────────────
   return (
@@ -225,7 +251,7 @@ export const MemoryInputPanel = ({ onSaved }) => {
               if (isRecording) stopRecording();
             }}
             className={cn(
-              "flex-1 py-1.5 rounded-full text-xs font-sans transition-all timeline-breath capitalize",
+              "flex-1 py-1.5 rounded-full text-xs font-sans transition-all timeline-breath capitalize focus-visible:ring-2 focus-visible:ring-terracotta outline-none",
               mode === m ? "bg-terracotta text-warm-white shadow-sm" : "text-sage hover:text-forest"
             )}>
             {m === "stt" ? "Voice-to-Text" : m === "audio" ? "Audio" : "Type"}
@@ -240,12 +266,16 @@ export const MemoryInputPanel = ({ onSaved }) => {
             ref={textareaRef}
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            maxLength={5000}
             placeholder={
               mode === "stt"
                 ? "Press 'Start Listening' below — your words will appear here."
                 : "A memory surfaced... write it here."
             }
             className="w-full min-h-[200px] bg-warm-white/40 border-none rounded-3xl p-6 font-serif text-lg leading-relaxed text-forest placeholder:italic placeholder:text-sage/40 focus:ring-2 focus:ring-terracotta/20 transition-all resize-none timeline-breath" />
+          <span className="text-[10px] text-sage/50 font-mono text-right block mt-1">
+            {content.length} / 5000
+          </span>
 
           {mode === "stt" && (
             <div className="flex flex-col items-center gap-3 mt-4">
@@ -276,57 +306,7 @@ export const MemoryInputPanel = ({ onSaved }) => {
             </div>
           )}
           
-          <div className="mt-6 space-y-5">
-            <div className="flex flex-wrap gap-2 items-center">
-              {tags.map(t => (
-                <span key={t} className="flex items-center gap-1 bg-terracotta/10 text-terracotta px-3 py-1 rounded-full text-xs font-sans border border-terracotta/20">
-                  #{t}
-                  <button onClick={() => setTags(tags.filter(x => x !== t))} className="hover:text-terracotta/70 ml-1 outline-none">
-                    <X size={12} />
-                  </button>
-                </span>
-              ))}
-              <input 
-                type="text" 
-                placeholder="Add tag (press Enter)"
-                value={tagInput}
-                onChange={e => setTagInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && tagInput.trim()) {
-                    e.preventDefault();
-                    if (!tags.includes(tagInput.trim())) setTags([...tags, tagInput.trim()]);
-                    setTagInput("");
-                  }
-                }}
-                className="text-xs font-sans px-4 py-1.5 bg-warm-white rounded-full border border-silver-sage/30 text-forest placeholder:text-sage/60 outline-none focus:border-terracotta transition-colors shadow-sm min-w-[150px]"
-              />
-            </div>
-            
-            <div className="space-y-2 pt-4 border-t border-silver-sage/20">
-              <span className="text-xs font-sans text-sage">How are you feeling right now?</span>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  { label: "Calm", icon: "🌿", value: "emotion:calm" },
-                  { label: "Uncertain", icon: "🌫", value: "emotion:uncertain" },
-                  { label: "Sad", icon: "🌧", value: "emotion:sad" },
-                  { label: "Afraid", icon: "🌑", value: "emotion:afraid" },
-                  { label: "Resolved", icon: "☀", value: "emotion:resolved" }
-                ].map(emotion => (
-                  <button
-                    key={emotion.value}
-                    onClick={() => setSelectedEmotion(selectedEmotion === emotion.value ? null : emotion.value)}
-                    className={cn(
-                      "flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-sans transition-colors border shadow-sm outline-none",
-                      selectedEmotion === emotion.value ? "bg-terracotta text-warm-white border-terracotta" : "bg-warm-white text-forest border-silver-sage/30 hover:border-terracotta/50"
-                    )}
-                  >
-                    <span>{emotion.icon}</span>
-                    <span>{emotion.label}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
+          {renderTagsAndEmotions()}
         </div>
       )}
 
@@ -433,6 +413,9 @@ export const MemoryInputPanel = ({ onSaved }) => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Tags and emotions always visible in audio mode */}
+          {renderTagsAndEmotions()}
         </div>
       )}
 
@@ -471,7 +454,7 @@ export const MemoryInputPanel = ({ onSaved }) => {
                       {["CERTAIN", "APPROXIMATE", "NOT_SURE"].map((c) =>
                         <button key={c} onClick={() => setConfidence(c)}
                           className={cn(
-                            "px-4 py-2 rounded-full text-[10px] font-sans border transition-all",
+                            "px-4 py-2 rounded-full text-[10px] font-sans border transition-all focus-visible:ring-2 focus-visible:ring-terracotta outline-none",
                             confidence === c ? "bg-sage text-warm-white border-sage" : "bg-transparent text-sage border-silver-sage hover:border-sage"
                           )}>
                           {c.replace("_", " ")}
