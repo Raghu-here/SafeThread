@@ -39,12 +39,12 @@ Current version: **0.0.0** (development)
 | **Grounding Modal** | Trauma-informed breathing exercise to center users before data entry | ✅ Stable |
 | **Voice-to-Text** | Real-time speech recognition for hands-free memory capture | ✅ Stable |
 | **AI Transcripts** | Integrated transcription for audio memories via OpenAI Whisper | ✅ Stable |
-| **Memory Ledger** | Export a cryptographically sealed text record (.txt) of all entries | ✅ Stable |
+| **Memory Ledger** | Export a cryptographically sealed PDF record of all entries for legal documentation | ✅ Stable |
 | **Timeline View** | Chronological rendering with monthly grouping, audio playback, and integrity hashes | ✅ Stable |
 | **Search & Filtering** | Filter by memory type and search through content for quick retrieval | ✅ Stable |
 | **Loading States** | Polished skeleton screens for data fetching and transitions | ✅ Stable |
 | **Responsive UI** | Mobile-first sidebar with Zustand state and support resource links | ✅ Stable |
-| **Anti-Gravity UI** | Scroll-driven parallax field with floating cards, depth layering, and cursor-reactive motion | ✅ Stable |
+| **Anti-Gravity UI** | Scroll-driven parallax field with floating fragments, depth layering, and cursor-reactive motion | ✅ Stable |
 | **Docker & Docker‑Compose** | One‑command dev and production environments | ✅ Stable |
 | **Tailwind‑CSS UI** | Responsive, trauma-informed front-end built with Vite | ✅ Stable |
 
@@ -150,15 +150,15 @@ cp apps/api/.env.example apps/api/.env
 
 > **Note**: Set `VITE_API_URL` in the web app’s `.env` (or `.env.local`) to point to your API base URL (e.g., `http://localhost:3000`). The front‑end will automatically ensure the URL ends with `/api` if it is not already present.
 
-The API now includes the following resources backed by Prisma models:
+The API now includes the following resources backed by Prisma models and cloud integrations:
 
 - **User** – registration, login, email verification, and password management.
 - **RefreshToken** – endpoint to rotate and revoke refresh tokens.
-- **MemoryCard** – create, read, update, delete memory cards; supports text, audio, transcripts, timestamps, confidence levels, and cryptographic hash generation.
+- **MemoryCard** – create, read, update, delete memory cards; supports text, transcripts, timestamps, and cryptographic hash generation.
 - **Tag** – CRUD operations for tags that can be attached to memory cards.
 - **MemoryCardTag** – associate tags with memory cards.
-- **MemoryAttachment** – upload and retrieve audio/video/image attachments with optional AI‑generated transcripts.
-- **Timeline** – create a personal timeline for each user.
+- **MemoryAttachment** – upload and retrieve audio/video/image attachments via AWS S3 with optional AI‑generated transcripts.
+- **Timeline** – create a personal timeline for each user, including PDF export functionality via `pdfkit` for legal documentation.
 - **TimelineEntry** – link memory cards to a timeline, enabling chronological reconstruction.
 
 All endpoints follow REST conventions under `/api/v1/`. See the automatically generated OpenAPI spec at `/api/docs` for full request/response schemas.
