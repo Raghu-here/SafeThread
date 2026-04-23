@@ -109,36 +109,19 @@ const FragmentCard = memo(({ card, scrollYProgress, mouseX, mouseY, isMobile, is
   const zConfig = zLayerConfig[card.zLayer];
   const actualYEnd = isMobile ? card.yEnd / 2 : card.yEnd;
 
-  /**
-   * Layer 1 — Scroll-Driven Lift
-   * Maps window scroll progress to deterministic Y/X offsets per card.
-   */
   const rawY = useTransform(scrollYProgress, [0, 1], [card.yStart, actualYEnd]);
   const hasXDrift = card.xDriftStart !== undefined && card.xDriftEnd !== undefined;
   const rawX = useTransform(scrollYProgress, [0, 1], hasXDrift ? [card.xDriftStart, card.xDriftEnd] : [0, 0]);
 
-  /**
-   * Layer 2 — Spring Damping Wrapper
-   * Wraps the raw scroll transforms in springs with varying stiffness by depth layer.
-   */
   const dragY = useSpring(rawY, { stiffness: zConfig.stiffness, damping: 18, mass: 1.2 });
   const dragX = useSpring(rawX, { stiffness: zConfig.stiffness, damping: 18, mass: 1.2 });
 
-  /**
-   * Layer 5 — Cursor Parallax (Desktop only)
-   * Tracks normalized cursor coordinate [-1, 1] mapped to small X/Y translation offsets.
-   */
   const parallaxXRaw = useTransform(mouseX, [-1, 1], [card.parallaxX * -1, card.parallaxX]);
   const parallaxYRaw = useTransform(mouseY, [-1, 1], [card.parallaxY * -1, card.parallaxY]);
   
   const parallaxSpringX = useSpring(parallaxXRaw, { stiffness: 80, damping: 22, mass: 0.8 });
   const parallaxSpringY = useSpring(parallaxYRaw, { stiffness: 80, damping: 22, mass: 0.8 });
 
-  /**
-   * Combination
-   * Compose independent motion layers into single output variables to avoid conflict.
-   * Disables parallax conditionally via isHoverable flag check inside the combination hook.
-   */
   const combinedX = useTransform([dragX, parallaxSpringX], ([dx, px]) => dx + (isHoverable ? px : 0));
   const combinedY = useTransform([dragY, parallaxSpringY], ([dy, py]) => dy + (isHoverable ? py : 0));
 
@@ -150,19 +133,11 @@ const FragmentCard = memo(({ card, scrollYProgress, mouseX, mouseY, isMobile, is
         left: `${card.left}%`,
         x: combinedX,
         y: combinedY,
-        /**
-         * Layer 4 — Depth Compositing (Z-Layer System)
-         * Driving scale, opacity, and blur filter strictly via static zLayer assignments.
-         */
         scale: zConfig.scale,
         opacity: zConfig.opacity,
         filter: `blur(${zConfig.blur})`,
         zIndex: zConfig.zIndex,
       }}
-      /**
-       * Layer 3 — Idle Keyframe Float
-       * Independent infinite keyframe loop to ensure field feels organic even when idle.
-       */
       animate={{
         y: [0, -10, 0],
         rotate: [0, card.idleRotate, 0]
@@ -183,7 +158,36 @@ const FragmentCard = memo(({ card, scrollYProgress, mouseX, mouseY, isMobile, is
   );
 });
 
+/** Static card for reduced-motion users */
+const StaticFragmentCard = ({ card, isMobile, index }) => {
+  const zConfig = zLayerConfig[card.zLayer];
+  const pos = isMobile
+    ? { top: `${index * 20 + 2}%`, left: `${index % 2 === 0 ? 5 : 45}%` }
+    : { top: `${card.top}%`, left: `${card.left}%` };
+
+  return (
+    <div
+      style={{
+        ...styles.card,
+        ...pos,
+        opacity: zConfig.opacity,
+        filter: `blur(${zConfig.blur})`,
+        zIndex: zConfig.zIndex,
+        transform: `scale(${zConfig.scale})`,
+      }}
+    >
+      <div style={styles.cardHeader}>
+        <div style={styles.dot} />
+        <p style={styles.label}>{card.label}</p>
+      </div>
+      <p style={styles.subLabel}>{card.subLabel}</p>
+    </div>
+  );
+};
+
 export default function AntiGravityField() {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isHoverable, setIsHoverable] = useState(false);
@@ -209,7 +213,6 @@ export default function AntiGravityField() {
     if (hoverQuery.addEventListener) {
       hoverQuery.addEventListener('change', handleHoverChange);
     } else {
-      // Fallback for older browsers
       hoverQuery.addListener(handleHoverChange);
     }
 
@@ -241,6 +244,28 @@ export default function AntiGravityField() {
 
   const displayFragments = isMobile ? FRAGMENTS.slice(0, 5) : FRAGMENTS;
 
+  // Reduced motion: render static cards with no animations
+  if (prefersReducedMotion) {
+    return (
+      <section ref={containerRef} style={styles.section}>
+        <div style={styles.headingWrap}>
+          <h2 style={styles.heading}>Your memories, held safely</h2>
+          <p style={styles.subHeading}>Fragments find their thread</p>
+        </div>
+        <div style={styles.innerContainer}>
+          {displayFragments.map((card, index) => (
+            <StaticFragmentCard
+              key={card.id}
+              card={card}
+              isMobile={isMobile}
+              index={index}
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section 
       ref={containerRef} 
@@ -256,8 +281,8 @@ export default function AntiGravityField() {
         {displayFragments.map((card, index) => {
           const responsiveCard = isMobile ? {
             ...card,
-            top: index * 20 + 2, // Spaced vertically down: 2%, 22%, 42%, 62%, 82% 
-            left: index % 2 === 0 ? 5 : 45 // Alternating L/R to avoid horizontal mobile squishing
+            top: index * 20 + 2,
+            left: index % 2 === 0 ? 5 : 45
           } : card;
           
           return (
