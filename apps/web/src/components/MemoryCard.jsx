@@ -42,7 +42,7 @@ export const MemoryCard = ({ memory, index }) => {
       setTimeout(() => {
         setShowSuccess(false);
         setIsCorrecting(false);
-        window.location.reload();
+        window.dispatchEvent(new Event("memorySaved"));
       }, 2000);
     } catch (err) {
       console.error(err);
@@ -155,13 +155,14 @@ export const MemoryCard = ({ memory, index }) => {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-mono text-sage uppercase tracking-wider">Date of Correction</label>
+                    <label className="text-xs font-mono text-sage uppercase tracking-wider">Corrected Event Date</label>
                     <input 
                       type="date"
                       required
                       value={correctionDate}
                       onChange={(e) => setCorrectionDate(e.target.value)}
                       className="w-full bg-warm-white border border-silver-sage/40 rounded-full px-5 py-3 text-forest outline-none focus:border-terracotta transition-colors font-mono text-sm"
+                      placeholder="When did the event actually occur?"
                     />
                   </div>
 
