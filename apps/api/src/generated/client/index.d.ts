@@ -3622,7 +3622,6 @@ export namespace Prisma {
     isSuperseded: boolean | null
     supersedesId: string | null
     hash: string | null
-    audioData: string | null
     transcript: string | null
   }
 
@@ -3637,7 +3636,6 @@ export namespace Prisma {
     isSuperseded: boolean | null
     supersedesId: string | null
     hash: string | null
-    audioData: string | null
     transcript: string | null
   }
 
@@ -3652,7 +3650,6 @@ export namespace Prisma {
     isSuperseded: number
     supersedesId: number
     hash: number
-    audioData: number
     transcript: number
     _all: number
   }
@@ -3669,7 +3666,6 @@ export namespace Prisma {
     isSuperseded?: true
     supersedesId?: true
     hash?: true
-    audioData?: true
     transcript?: true
   }
 
@@ -3684,7 +3680,6 @@ export namespace Prisma {
     isSuperseded?: true
     supersedesId?: true
     hash?: true
-    audioData?: true
     transcript?: true
   }
 
@@ -3699,7 +3694,6 @@ export namespace Prisma {
     isSuperseded?: true
     supersedesId?: true
     hash?: true
-    audioData?: true
     transcript?: true
     _all?: true
   }
@@ -3787,7 +3781,6 @@ export namespace Prisma {
     isSuperseded: boolean
     supersedesId: string | null
     hash: string
-    audioData: string | null
     transcript: string | null
     _count: MemoryCardCountAggregateOutputType | null
     _min: MemoryCardMinAggregateOutputType | null
@@ -3819,7 +3812,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: boolean
     hash?: boolean
-    audioData?: boolean
     transcript?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     supersedes?: boolean | MemoryCard$supersedesArgs<ExtArgs>
@@ -3841,7 +3833,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: boolean
     hash?: boolean
-    audioData?: boolean
     transcript?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     supersedes?: boolean | MemoryCard$supersedesArgs<ExtArgs>
@@ -3858,7 +3849,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: boolean
     hash?: boolean
-    audioData?: boolean
     transcript?: boolean
   }
 
@@ -3897,7 +3887,6 @@ export namespace Prisma {
       isSuperseded: boolean
       supersedesId: string | null
       hash: string
-      audioData: string | null
       transcript: string | null
     }, ExtArgs["result"]["memoryCard"]>
     composites: {}
@@ -4308,7 +4297,6 @@ export namespace Prisma {
     readonly isSuperseded: FieldRef<"MemoryCard", 'Boolean'>
     readonly supersedesId: FieldRef<"MemoryCard", 'String'>
     readonly hash: FieldRef<"MemoryCard", 'String'>
-    readonly audioData: FieldRef<"MemoryCard", 'String'>
     readonly transcript: FieldRef<"MemoryCard", 'String'>
   }
     
@@ -10311,7 +10299,6 @@ export namespace Prisma {
     isSuperseded: 'isSuperseded',
     supersedesId: 'supersedesId',
     hash: 'hash',
-    audioData: 'audioData',
     transcript: 'transcript'
   };
 
@@ -10609,7 +10596,6 @@ export namespace Prisma {
     isSuperseded?: BoolFilter<"MemoryCard"> | boolean
     supersedesId?: StringNullableFilter<"MemoryCard"> | string | null
     hash?: StringFilter<"MemoryCard"> | string
-    audioData?: StringNullableFilter<"MemoryCard"> | string | null
     transcript?: StringNullableFilter<"MemoryCard"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     supersedes?: XOR<MemoryCardNullableRelationFilter, MemoryCardWhereInput> | null
@@ -10630,7 +10616,6 @@ export namespace Prisma {
     isSuperseded?: SortOrder
     supersedesId?: SortOrderInput | SortOrder
     hash?: SortOrder
-    audioData?: SortOrderInput | SortOrder
     transcript?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     supersedes?: MemoryCardOrderByWithRelationInput
@@ -10654,7 +10639,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFilter<"MemoryCard"> | Date | string
     isSuperseded?: BoolFilter<"MemoryCard"> | boolean
     hash?: StringFilter<"MemoryCard"> | string
-    audioData?: StringNullableFilter<"MemoryCard"> | string | null
     transcript?: StringNullableFilter<"MemoryCard"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     supersedes?: XOR<MemoryCardNullableRelationFilter, MemoryCardWhereInput> | null
@@ -10675,7 +10659,6 @@ export namespace Prisma {
     isSuperseded?: SortOrder
     supersedesId?: SortOrderInput | SortOrder
     hash?: SortOrder
-    audioData?: SortOrderInput | SortOrder
     transcript?: SortOrderInput | SortOrder
     _count?: MemoryCardCountOrderByAggregateInput
     _max?: MemoryCardMaxOrderByAggregateInput
@@ -10696,7 +10679,6 @@ export namespace Prisma {
     isSuperseded?: BoolWithAggregatesFilter<"MemoryCard"> | boolean
     supersedesId?: StringNullableWithAggregatesFilter<"MemoryCard"> | string | null
     hash?: StringWithAggregatesFilter<"MemoryCard"> | string
-    audioData?: StringNullableWithAggregatesFilter<"MemoryCard"> | string | null
     transcript?: StringNullableWithAggregatesFilter<"MemoryCard"> | string | null
   }
 
@@ -11143,7 +11125,6 @@ export namespace Prisma {
     submittedAt?: Date | string
     isSuperseded?: boolean
     hash: string
-    audioData?: string | null
     transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
@@ -11164,7 +11145,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: string | null
     hash: string
-    audioData?: string | null
     transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -11181,7 +11161,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
@@ -11202,7 +11181,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -11221,7 +11199,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: string | null
     hash: string
-    audioData?: string | null
     transcript?: string | null
   }
 
@@ -11234,7 +11211,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -11249,7 +11225,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -11784,7 +11759,6 @@ export namespace Prisma {
     isSuperseded?: SortOrder
     supersedesId?: SortOrder
     hash?: SortOrder
-    audioData?: SortOrder
     transcript?: SortOrder
   }
 
@@ -11799,7 +11773,6 @@ export namespace Prisma {
     isSuperseded?: SortOrder
     supersedesId?: SortOrder
     hash?: SortOrder
-    audioData?: SortOrder
     transcript?: SortOrder
   }
 
@@ -11814,7 +11787,6 @@ export namespace Prisma {
     isSuperseded?: SortOrder
     supersedesId?: SortOrder
     hash?: SortOrder
-    audioData?: SortOrder
     transcript?: SortOrder
   }
 
@@ -12661,7 +12633,6 @@ export namespace Prisma {
     submittedAt?: Date | string
     isSuperseded?: boolean
     hash: string
-    audioData?: string | null
     transcript?: string | null
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
     supersededBy?: MemoryCardCreateNestedOneWithoutSupersedesInput
@@ -12680,7 +12651,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: string | null
     hash: string
-    audioData?: string | null
     transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -12752,7 +12722,6 @@ export namespace Prisma {
     isSuperseded?: BoolFilter<"MemoryCard"> | boolean
     supersedesId?: StringNullableFilter<"MemoryCard"> | string | null
     hash?: StringFilter<"MemoryCard"> | string
-    audioData?: StringNullableFilter<"MemoryCard"> | string | null
     transcript?: StringNullableFilter<"MemoryCard"> | string | null
   }
 
@@ -12879,7 +12848,6 @@ export namespace Prisma {
     submittedAt?: Date | string
     isSuperseded?: boolean
     hash: string
-    audioData?: string | null
     transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
@@ -12899,7 +12867,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: string | null
     hash: string
-    audioData?: string | null
     transcript?: string | null
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
     attachments?: MemoryAttachmentUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -12920,7 +12887,6 @@ export namespace Prisma {
     submittedAt?: Date | string
     isSuperseded?: boolean
     hash: string
-    audioData?: string | null
     transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersededBy?: MemoryCardCreateNestedOneWithoutSupersedesInput
@@ -12939,7 +12905,6 @@ export namespace Prisma {
     submittedAt?: Date | string
     isSuperseded?: boolean
     hash: string
-    audioData?: string | null
     transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -13066,7 +13031,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
@@ -13086,7 +13050,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
     attachments?: MemoryAttachmentUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13113,7 +13076,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersededBy?: MemoryCardUpdateOneWithoutSupersedesNestedInput
@@ -13132,7 +13094,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13258,7 +13219,6 @@ export namespace Prisma {
     submittedAt?: Date | string
     isSuperseded?: boolean
     hash: string
-    audioData?: string | null
     transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
@@ -13278,7 +13238,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: string | null
     hash: string
-    audioData?: string | null
     transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     attachments?: MemoryAttachmentUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -13327,7 +13286,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
@@ -13347,7 +13305,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     attachments?: MemoryAttachmentUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13386,7 +13343,6 @@ export namespace Prisma {
     submittedAt?: Date | string
     isSuperseded?: boolean
     hash: string
-    audioData?: string | null
     transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
@@ -13406,7 +13362,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: string | null
     hash: string
-    audioData?: string | null
     transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -13438,7 +13393,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
@@ -13458,7 +13412,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13537,7 +13490,6 @@ export namespace Prisma {
     submittedAt?: Date | string
     isSuperseded?: boolean
     hash: string
-    audioData?: string | null
     transcript?: string | null
     user: UserCreateNestedOneWithoutMemoriesInput
     supersedes?: MemoryCardCreateNestedOneWithoutSupersededByInput
@@ -13557,7 +13509,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: string | null
     hash: string
-    audioData?: string | null
     transcript?: string | null
     supersededBy?: MemoryCardUncheckedCreateNestedOneWithoutSupersedesInput
     tags?: MemoryCardTagUncheckedCreateNestedManyWithoutMemoryCardInput
@@ -13610,7 +13561,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutMemoriesNestedInput
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
@@ -13630,7 +13580,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13647,7 +13596,6 @@ export namespace Prisma {
     isSuperseded?: boolean
     supersedesId?: string | null
     hash: string
-    audioData?: string | null
     transcript?: string | null
   }
 
@@ -13667,7 +13615,6 @@ export namespace Prisma {
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersedes?: MemoryCardUpdateOneWithoutSupersededByNestedInput
     supersededBy?: MemoryCardUpdateOneWithoutSupersedesNestedInput
@@ -13686,7 +13633,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
     supersededBy?: MemoryCardUncheckedUpdateOneWithoutSupersedesNestedInput
     tags?: MemoryCardTagUncheckedUpdateManyWithoutMemoryCardNestedInput
@@ -13704,7 +13650,6 @@ export namespace Prisma {
     isSuperseded?: BoolFieldUpdateOperationsInput | boolean
     supersedesId?: NullableStringFieldUpdateOperationsInput | string | null
     hash?: StringFieldUpdateOperationsInput | string
-    audioData?: NullableStringFieldUpdateOperationsInput | string | null
     transcript?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

@@ -151,7 +151,6 @@ exports.Prisma.MemoryCardScalarFieldEnum = {
   isSuperseded: 'isSuperseded',
   supersedesId: 'supersedesId',
   hash: 'hash',
-  audioData: 'audioData',
   transcript: 'transcript'
 };
 
