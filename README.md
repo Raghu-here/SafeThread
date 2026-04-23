@@ -35,6 +35,7 @@ Current version: **0.0.0** (development)
 | **User authentication** | Secure JWT + refresh‑token flow, bcrypt password hashing | ✅ Stable |
 | **Onboarding Tour** | Multi-step guided tour explaining immutability, timeline assembly, and legal-grade exports | ✅ Stable |
 | **Memory CRUD** | Create and manage personal memories (text and audio) | ✅ Stable |
+| **Memory Correction** | Create interconnected memories to correct previous entries while marking originals as superseded | ✅ Stable |
 | **Grounding Modal** | Trauma-informed breathing exercise to center users before data entry | ✅ Stable |
 | **Voice-to-Text** | Real-time speech recognition for hands-free memory capture | ✅ Stable |
 | **AI Transcripts** | Integrated transcription for audio memories via OpenAI Whisper | ✅ Stable |
