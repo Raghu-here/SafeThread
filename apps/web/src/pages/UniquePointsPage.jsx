@@ -1,55 +1,33 @@
 import React from 'react';
-import { Layout, Button, Space } from 'antd';
 import { UniquePointsSection } from '../components/UniquePointsSection';
 import { FooterSection } from '../components/FooterSection';
-
-const { Header } = Layout;
+import { Link } from 'react-router-dom';
 
 export const UniquePointsPage = () => {
-  const palette = {
-    cream: '#ffe8d6',
-    darkOlive: '#6b705c',
-    beige: '#ddbea9',
-    sageGreen: '#a5a58d',
-  };
-
   return (
-    <Layout>
-      <Header style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'space-between', 
-        backgroundColor: palette.cream,
-        padding: '0 50px',
-        borderBottom: `1px solid ${palette.beige}`
-      }}>
-        <div style={{ fontSize: '24px', fontWeight: 'bold', color: palette.darkOlive, fontFamily: 'serif' }}>
+    <div className="min-h-screen flex flex-col">
+      <header className="flex items-center justify-between bg-warm-white px-12 border-b border-silver-sage/40 h-16">
+        <div className="text-2xl font-bold text-forest font-serif">
           SafeThread
         </div>
         
-        <Space size="large">
-          <Button type="text" style={{ color: palette.darkOlive }}>Dashboard</Button>
-          <Button type="text" style={{ color: palette.darkOlive }}>Timeline</Button>
-        </Space>
+        <div className="flex gap-8 items-center">
+          <Link to="/dashboard" className="text-forest hover:text-terracotta transition-colors font-medium">Dashboard</Link>
+          <Link to="/timeline" className="text-forest hover:text-terracotta transition-colors font-medium">Timeline</Link>
+        </div>
 
-        <Button 
-          className="usp-btn"
-          style={{ 
-            backgroundColor: palette.sageGreen, 
-            color: palette.cream, 
-            border: 'none',
-            height: '40px',
-            padding: '0 24px',
-            fontWeight: '500'
-          }}
+        <button 
+          className="bg-sage text-warm-white border-none h-10 px-6 font-medium rounded-md hover:bg-forest transition-colors"
         >
           Our Unique Points
-        </Button>
-      </Header>
+        </button>
+      </header>
 
-      <UniquePointsSection />
+      <main className="flex-1">
+        <UniquePointsSection />
+      </main>
 
       <FooterSection />
-    </Layout>
+    </div>
   );
 };
