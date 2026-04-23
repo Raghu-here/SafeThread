@@ -24,6 +24,7 @@ SafeThread is a secure, full-stack platform designed to preserve delicate memori
 - **Privacy-First** – JWT-based authentication, bcrypt-hashed passwords, and encrypted storage (including optional AWS S3 support).
 - **Multi-Modal Support** – Capture memories via text, images, PDFs (up to 50MB), or voice-to-text and audio recordings.
 - **Advocacy Ready** – Generate secure chronological documents to share your story with counselors or advocates when you're ready.
+- **Value Proposition Showcase** – Dedicated interface highlighting the platform's unique security and structural advantages.
 
 Current version: **0.0.0** (development)
 
@@ -42,6 +43,7 @@ Current version: **0.0.0** (development)
 | **Memory Ledger** | Export a cryptographically sealed PDF record of all entries for legal documentation | ✅ Stable |
 | **Timeline View** | Chronological rendering with monthly grouping, audio playback, and integrity hashes | ✅ Stable |
 | **Search & Filtering** | Filter by memory type and search through content for quick retrieval | ✅ Stable |
+| **Unique Points Showcase** | Dedicated page detailing platform differentiators with integrated navigation | ✅ Stable |
 | **Loading States** | Polished skeleton screens for data fetching and transitions | ✅ Stable |
 | **Responsive UI** | Mobile-first sidebar with Zustand state and support resource links | ✅ Stable |
 | **Anti-Gravity UI** | Scroll-driven parallax field with floating fragments, depth layering, and cursor-reactive motion | ✅ Stable |
