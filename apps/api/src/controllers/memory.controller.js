@@ -3,11 +3,12 @@ import prisma from '../lib/prisma.js';
 import { CreateMemoryCardSchema } from "@safethread/shared";
 
 import { calculateMemoryHash } from '../lib/crypto.js';
+import { uploadBufferToS3 } from '../lib/storage.js';
 
 export const createMemory = async (req, res) => {
   try {
     const validatedData = CreateMemoryCardSchema.parse(req.body);
-    const audioData = req.body.audioData || null;   // stored outside validated schema
+    const audioData = req.body.audioData || null;
     const userId = req.user.userId;
     const submittedAt = new Date();
 
@@ -38,6 +39,19 @@ export const createMemory = async (req, res) => {
       }
     }
 
+    // Upload audio to S3 if provided
+    let audioUrl = null;
+    if (audioData) {
+      try {
+        const base64Clean = audioData.replace(/^data:audio\/\w+;base64,/, "");
+        const buffer = Buffer.from(base64Clean, "base64");
+        const key = `memories/${userId}/${Date.now()}-audio.webm`;
+        audioUrl = await uploadBufferToS3(buffer, key, "audio/webm");
+      } catch (err) {
+        console.error("S3 audio upload error:", err);
+      }
+    }
+
     const memory = await prisma.$transaction(async (tx) => {
       // If this is a correction, mark original as superseded
       if (validatedData.supersedesId) {
@@ -57,7 +71,6 @@ export const createMemory = async (req, res) => {
           submittedAt,
           supersedesId: validatedData.supersedesId,
           hash,
-          audioData,
           transcript,
           tags: {
             create: validatedData.tags?.map((tagName) => ({
@@ -74,6 +87,18 @@ export const createMemory = async (req, res) => {
           tags: { include: { tag: true } }
         }
       });
+
+      // Create MemoryAttachment for the audio URL
+      if (audioUrl) {
+        await tx.memoryAttachment.create({
+          data: {
+            memoryCardId: created.id,
+            type: "audio",
+            url: audioUrl,
+            transcript,
+          }
+        });
+      }
 
       await tx.auditLog.create({
         data: {
@@ -100,16 +125,25 @@ export const createMemory = async (req, res) => {
 export const getMemories = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const memories = await prisma.memoryCard.findMany({
-      where: { userId },
-      include: {
-        tags: { include: { tag: true } },
-        attachments: true
-      },
-      orderBy: { submittedAt: "desc" }
-    });
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(req.query.limit) || 20));
+    const skip = (page - 1) * limit;
 
-    res.json(memories);
+    const [memories, total] = await Promise.all([
+      prisma.memoryCard.findMany({
+        where: { userId },
+        include: {
+          tags: { include: { tag: true } },
+          attachments: true
+        },
+        orderBy: { submittedAt: "desc" },
+        skip,
+        take: limit,
+      }),
+      prisma.memoryCard.count({ where: { userId } }),
+    ]);
+
+    res.json({ data: memories, total, page, limit });
   } catch (error) {
     console.error('Memory fetch error:', error);
     res.status(500).json({ message: "We're having a little trouble reaching your memories. Please try refreshing — everything you've stored is safe." });

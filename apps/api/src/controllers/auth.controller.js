@@ -46,10 +46,8 @@ export const register = async (req, res) => {
     });
   } catch (error) {
     console.error('[Register] Critical Error:', error);
-    if (error.code) console.error('[Register] Prisma Error Code:', error.code);
     res.status(400).json({ 
-      message: error.message || "We had trouble creating your space.",
-      debug: error.code || 'VALIDATION_ERROR' 
+      message: error.message || "We had trouble creating your space."
     });
   }
 };
@@ -137,16 +135,34 @@ export const logout = async (req, res) => {
 
 export const changePassword = async (req, res) => {
   try {
-    const { newPassword } = req.body;
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword) {
+      return res.status(400).json({ message: "Current password is required." });
+    }
     if (!newPassword || newPassword.length < 6) {
       return res.status(400).json({ message: "Password must be at least 6 characters." });
     }
+
+    const user = await prisma.user.findUnique({ where: { id: req.user.userId } });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Current password is incorrect." });
+    }
+
     const hashed = await bcrypt.hash(newPassword, 12);
     await prisma.user.update({
       where: { id: req.user.userId },
       data: { password: hashed }
     });
-    res.json({ message: "Password changed successfully." });
+
+    // Invalidate all refresh tokens for this user
+    await prisma.refreshToken.deleteMany({ where: { userId: req.user.userId } });
+
+    res.json({ message: "Password changed successfully. Please sign in again." });
   } catch (_) {
     res.status(500).json({ message: "Could not update password." });
   }
@@ -168,14 +184,11 @@ export const updateProfile = async (req, res) => {
 export const deleteAccount = async (req, res) => {
   try {
     const userId = req.user.userId;
-    // Delete in correct dependency order
+    // Batched deletes using Prisma relation filters — no N+1
     await prisma.refreshToken.deleteMany({ where: { userId } });
     await prisma.auditLog.deleteMany({ where: { userId } });
-    const memories = await prisma.memoryCard.findMany({ where: { userId }, select: { id: true } });
-    for (const m of memories) {
-      await prisma.memoryCardTag.deleteMany({ where: { memoryCardId: m.id } });
-      await prisma.memoryAttachment.deleteMany({ where: { memoryCardId: m.id } });
-    }
+    await prisma.memoryCardTag.deleteMany({ where: { memoryCard: { userId } } });
+    await prisma.memoryAttachment.deleteMany({ where: { memoryCard: { userId } } });
     await prisma.memoryCard.deleteMany({ where: { userId } });
     await prisma.user.delete({ where: { id: userId } });
     res.json({ message: "Account terminated. Be safe." });

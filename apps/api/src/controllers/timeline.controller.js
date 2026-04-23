@@ -6,19 +6,28 @@ import prisma from '../lib/prisma.js';
 export const getTimeline = async (req, res) => {
   try {
     const userId = req.user.userId;
-    const memories = await prisma.memoryCard.findMany({
-      where: { userId },
-      include: {
-        tags: { include: { tag: true } }
-      },
-      orderBy: [
-      { eventDate: "asc" },
-      { eventTime: "asc" },
-      { submittedAt: "asc" }]
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = Math.min(100, Math.max(1, parseInt(req.query.limit) || 20));
+    const skip = (page - 1) * limit;
 
-    });
+    const [memories, total] = await Promise.all([
+      prisma.memoryCard.findMany({
+        where: { userId },
+        include: {
+          tags: { include: { tag: true } }
+        },
+        orderBy: [
+          { eventDate: "asc" },
+          { eventTime: "asc" },
+          { submittedAt: "asc" }
+        ],
+        skip,
+        take: limit,
+      }),
+      prisma.memoryCard.count({ where: { userId } }),
+    ]);
 
-    res.json(memories);
+    res.json({ data: memories, total, page, limit });
   } catch (error) {
     res.status(500).json({ message: "We're having trouble building your timeline." });
   }

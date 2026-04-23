@@ -12,6 +12,9 @@ export const QuickExit = () => {
   if (!user || isAuthPage) return null;
 
   const handleExit = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    useAuthStore.getState().clearAuth();
     sessionStorage.clear();
     window.location.replace("https://google.com");
   };
